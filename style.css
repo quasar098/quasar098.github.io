@@ -1,0 +1,91 @@
+html {
+	height: 100%;
+}
+.text {
+	color: #000000;
+}
+body {
+	background: linear-gradient(to top left, #90d7ff, #b3fffc);
+	margin: 0px;
+}
+p {
+	font-size: 20px;
+	font-family: arial;
+	color: black;
+	margin: auto 0 auto auto;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 10px;
+	padding-right: 0px;
+	line-height: 28px;
+	height: 100%;
+	width: 52%;
+}
+li {
+	font-size: 20px;
+	font-family: arial;
+	color: black;
+}
+h2 {
+	font-size: 50px;
+	font-family: arial;
+	text-align: center;
+	margin: 0 30px 5px 30px;
+}
+button {
+	background-color: #c3ffff;
+	font-size: 30px;
+	font-family: arial;
+	width: 23%;
+	margin: 0 auto 0 12px;
+	display: table;
+	border-radius: 5px;
+	height: 120px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	transition-duration: 0.5s;
+	box-shadow: 0 1rem 3rem rgb(0 0 0 / 25%);
+	filter: blur();
+}
+button:hover {
+	font-size: 36px;
+	width: 26%;
+}
+.wide {
+	width: 100%;
+	display: flex;
+	background-blend-mode: lighten;
+	background: rgba(255, 255, 255, 0.15);
+	align-items: center;
+	box-shadow: 0 1rem 1rem rgb(0 0 0 / 5%);
+	filter: blur();
+}
+ol {
+	list-style-type: inherit;
+}
+.wide-header {
+	width: 100%;
+	display: flex;
+	background-blend-mode: lighten;
+	background: rgba(255, 255, 255, 0.3);
+	align-items: center;
+	box-shadow: 0 1rem 1rem rgb(0 0 0 / 5%);
+	filter: blur();
+}
+i {
+	font-size: 40px !important;
+	transition-duration: 0.4s;
+}
+i:hover {
+	font-size: 48px !important;
+}
+a {
+	text-align: center;
+	margin: auto;
+}
+.flex-fall-left {
+	margin: auto auto auto 0;
+}
+.flex-fall-right {
+	margin: auto 0 auto auto;
+}
