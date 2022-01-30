@@ -1,9 +1,21 @@
 const headText = $("#head-text")[0];
 const body = $("body")[0];
-const board = $("#board")[0];
+const handDiv = $("#handDiv")[0];
 let lastHeaderSayEventId = 0;
 
+class PlayerManager {
+	constructor(username) {
+		this.username = username;
+		this.cards = [];
+	}
+}
+
+var localPlayer = new PlayerManager("quasar098");
+
 function headerSay(total="", letterCount=0, speed=40) {
+	if (letterCount == 0) {
+	   clearTimeout(lastHeaderSayEventId);
+	}
 	var nextLetter = 0;
 	if (total.length == letterCount) {
 		return;
@@ -18,9 +30,62 @@ function headerSay(total="", letterCount=0, speed=40) {
 	headText.innerHTML = total.slice(0, letterCount+1);
 }
 
-body.addEventListener("mousedown", (event) => {
-	if (event.button == 0) {
-		clearTimeout(lastHeaderSayEventId);
-		headerSay("It's just insane!");
+function createCardInHand() {
+	let cardAdd = new Card();
+	localPlayer.cards.push(cardAdd);
+   	handDiv.appendChild(cardAdd.elem);
+}
+
+function removeCardFromHand(card) {
+	handDiv.removeChild(card);
+}
+
+class Card {
+	constructor() {
+		// card variables
+		this.cost = 0;
+		this.cost_type = 0; // 0=blood, 1=bones
+
+		this.attack = 0;
+		this.max_health = 0;
+		this.health = this.max_health;
+		this.sigils = [];
+
+		// elem
+		var elem = document.createElement("div");
+		elem.classList.add("card");
+
+		// image
+		var image = document.createElement("img");
+		image.src = "images/blank.png";
+		image.classList.add("card-image");
+
+		// card texts
+		var cardTexts = document.createElement("div");
+		cardTexts.classList.add("card-texts");
+
+		// attack number
+		var attackNumberText = document.createElement("p");
+		attackNumberText.innerHTML = parseInt(this.attack);
+		attackNumberText.classList.add("attack-number");
+		attackNumberText.classList.add("card-text");
+
+		// appends
+		cardTexts.appendChild(attackNumberText);
+		elem.appendChild(attackNumberText);
+		elem.appendChild(image);
+
+		// set this.elem to the actual element
+		this.elem = elem;
+		this.elem.addEventListener("mousedown", (event) => {
+			// try to kill stuff to play stuff
+		});
 	}
-});
+}
+
+createCardInHand("ouroboros");
+createCardInHand("ouroboros");
+createCardInHand("ouroboros");
+
+// prevent dragging images
+$('img').on('dragstart', false);
