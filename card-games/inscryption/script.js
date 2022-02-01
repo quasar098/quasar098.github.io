@@ -60,21 +60,23 @@ class Card {
 		image.src = "images/blank.png";
 		image.classList.add("card-image");
 
-		// card texts
-		var cardTexts = document.createElement("div");
-		cardTexts.classList.add("card-texts");
-
 		// attack number
 		var attackNumberText = document.createElement("p");
 		attackNumberText.innerHTML = parseInt(this.attack);
 		attackNumberText.classList.add("attack-number");
 		attackNumberText.classList.add("card-text");
 
-		// appends
-		cardTexts.appendChild(attackNumberText);
-		elem.appendChild(attackNumberText);
-		elem.appendChild(image);
+		// health health
+		var healthNumberText = document.createElement("p");
+		healthNumberText.innerHTML = parseInt(this.health);
+		healthNumberText.classList.add("health-number");
+		healthNumberText.classList.add("card-text");
 
+		// appends
+		elem.appendChild(image);
+		elem.appendChild(attackNumberText);
+		elem.appendChild(healthNumberText);
+		
 		// set this.elem to the actual element
 		this.elem = elem;
 		this.elem.addEventListener("mousedown", (event) => {
