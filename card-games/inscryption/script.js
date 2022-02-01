@@ -76,7 +76,7 @@ class Card {
 		elem.appendChild(image);
 		elem.appendChild(attackNumberText);
 		elem.appendChild(healthNumberText);
-
+		
 		// set this.elem to the actual element
 		this.elem = elem;
 		this.elem.addEventListener("mousedown", (event) => {
