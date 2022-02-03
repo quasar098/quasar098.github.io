@@ -2,9 +2,11 @@ const restartMenu = document.getElementsByClassName("menu")[0];
 const restartText = document.getElementById("restartText");
 const scoreText = document.getElementById("scoreText");
 const timeText = document.getElementById("timeText");
+const startTime = 30;
 let targets = [];
 let score = 0;
-let time = 0;
+let time = 30;
+let timerID = 0;
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -19,11 +21,26 @@ for (let addTarget of document.getElementsByClassName("target")) {
   addTarget.addEventListener("mousedown", (event) => {
     if (event.button == 0) {
       relocate(addTarget);
-      score += 1;
+      if (score == 0) {
+        timerID = setInterval(timerClick, 1000);
+      }
+      if (time > 0) {
+        score += 1;
+      }
       redoText();
+
     }
   });
   targets.push(addTarget);
+}
+
+function timerClick() {
+  time -= 1;
+  if (time == -1) {
+    time += 1;
+    clearInterval(timerID);
+  }
+  redoText();
 }
 
 
@@ -50,6 +67,8 @@ function restart() {
     relocate(target);
   }
   score = 0;
+  clearInterval(timerID);
+  time = startTime;
   redoText();
 }
 restart();
