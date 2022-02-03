@@ -1,0 +1,37 @@
+body {
+  background: linear-gradient(to top left, #CFFFD9 20%, #ADF7B6 100%);
+  width: 90%;
+  height: 90%;
+  margin-left: 5%;
+  margin-top: 1%;
+}
+html {
+  height: 100%;
+  width: 100%;
+}
+p {
+  font-size: 36px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: bold;
+  margin: 2px;
+}
+h2 {
+  font-size: 48px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: bold;
+  margin: 2px;
+  text-align: center;
+}
+div.menu {
+  background-color: #FFFFFF;
+  width: 30%;
+  margin-left: 35%;
+  border-radius: 40px;
+  transition: 0.5s;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier();
+}
+.menu:hover {
+  width: 60%;
+  margin-left: 20%;
+}
