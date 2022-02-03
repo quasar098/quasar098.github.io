@@ -52,6 +52,5 @@ div.menu {
   margin-left: 10%;
 }
 img {
-  zoom: 300%;  /* TODO: blurry sprite */
   position: absolute;
 }
