@@ -58,6 +58,8 @@ div.menu {
   font-size: 20px !important;
   padding-top: 10px;
   padding-bottom: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .menu:hover {
   width: 80%;
