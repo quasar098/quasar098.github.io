@@ -60,6 +60,20 @@ class Card {
 		image.src = "images/blank.png";
 		image.classList.add("card-image");
 
+		// attack div to put on top
+		var attackDiv = document.createElement("div");
+		attackDiv.classList.add("attack-div");
+
+		// fake images
+		var fakeAttack = document.createElement("img");
+		fakeAttack.classList.add("attack-overwrite");
+		fakeAttack.src = "images/blank.png";
+
+
+		// health div
+		var healthDiv = document.createElement("div");
+		healthDiv.classList.add("health-div");
+
 		// attack number
 		var attackNumberText = document.createElement("p");
 		attackNumberText.innerHTML = parseInt(this.attack);
@@ -74,9 +88,12 @@ class Card {
 
 		// appends
 		elem.appendChild(image);
-		elem.appendChild(attackNumberText);
-		elem.appendChild(healthNumberText);
-		
+		attackDiv.appendChild(fakeAttack);
+		attackDiv.appendChild(attackNumberText);
+		healthDiv.appendChild(healthNumberText);
+		elem.appendChild(attackDiv);
+		elem.appendChild(healthDiv);
+
 		// set this.elem to the actual element
 		this.elem = elem;
 		this.elem.addEventListener("mousedown", (event) => {
@@ -85,9 +102,9 @@ class Card {
 	}
 }
 
-createCardInHand("ouroboros");
-createCardInHand("ouroboros");
-createCardInHand("ouroboros");
+document.body.addEventListener("mousedown", (e) => {
+	headerSay("This project has been shut down because I don't want to get caught in legal concerns with using © Daniel Mullins Games artwork being on a publicly availible website");
+})
 
 // prevent dragging images
 $('img').on('dragstart', false);

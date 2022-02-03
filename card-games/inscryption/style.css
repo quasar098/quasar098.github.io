@@ -54,16 +54,48 @@ div.card {
 img.card-image {
 	user-select: none;
 	height: 200px;
+	width: auto;
 	object-fit: fill;
+}
+div.attack-div {
+	height: 40%;
+	padding-top: 100%;
+	width: 29%;
+	display: grid;
+}
+div.attack-div > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+img.attack-overwrite {
+	user-select: none;
+	height: 10%;
+	width: 100%;
+	object-fit: none;
+	transform: scale(0.11);
+	left: 0px;
+}
+div.health-div {
+	height: 40%;
+	padding-top: 100%;
+	width: 30%;
+	padding-left: 70%;
+	display: grid;
+}
+div.health-div > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
 }
 p.card-text {
 	font-size: 34px;
 }
 p.attack-number {
-	padding-top: 109%;
-	padding-left: 10%;
+	padding-top: 15px;
+	padding-left: 13px;
+	width: 10px;
 }
 p.health-number {
-	padding-top: 117%;
-	padding-left: 80%;
+	padding-top: 55%;
+	padding-left: 34%;
+	height: 1px;
 }
