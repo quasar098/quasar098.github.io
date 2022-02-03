@@ -4,6 +4,7 @@ body {
   height: 90%;
   margin-left: 5%;
   margin-top: 1%;
+  user-select: none;
 }
 html {
   height: 100%;
@@ -14,6 +15,11 @@ p {
   font-family: "Helvetica Neue", Helvetica;
   font-weight: bold;
   margin: 2px;
+}
+.centered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 h2 {
   font-size: 48px;
@@ -31,15 +37,19 @@ h5 {
 }
 div.menu {
   background-color: #FFFFFF;
-  width: 30%;
-  margin-left: 35%;
-  border-radius: 40px;
+  width: 75%;
+  margin-left: 12.5%;
+  border-radius: 20px;
   transition-duration: 0.3s;
   user-select: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
+  filter: blur();
 }
 .menu:hover {
-  width: 35%;
-  margin-left: 32.5%;
+  width: 80%;
+  margin-left: 10%;
 }
 img {
   zoom: 300%;  /* TODO: blurry sprite */
