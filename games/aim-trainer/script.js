@@ -31,6 +31,7 @@ for (let addTarget of document.getElementsByClassName("target")) {
 
     }
   });
+  addTarget.ondragstart = function() { return false; };
   targets.push(addTarget);
 }
 
