@@ -1,9 +1,10 @@
-const restartMenu = document.getElementsByClassName("menu")[0];
+const restartMenu = document.getElementById("menu");
 const restartText = document.getElementById("restartText");
 const scoreText = document.getElementById("scoreText");
 const timeText = document.getElementById("timeText");
 const gameOverDiv = document.getElementById("game-over-div");
 const copyButton = document.getElementById("copy");
+const controlDiv = document.getElementById("control-div");
 const startTime = 30;
 let targets = [];
 let score = 0;
@@ -71,7 +72,7 @@ restartMenu.addEventListener("mousedown", (event) => {
 
 copyButton.addEventListener("mousedown", (event) => {
 	if (event.button == 0) {
-		navigator.clipboard.writeText("QUASAR's Aim Trainer - score: " + score + " - time: " + startTime);
+		navigator.clipboard.writeText("quasar098's Aim Trainer - score: " + score + " - time: " + startTime);
 		restartText.innerHTML = "Copied to clipboard";
 	}
 })

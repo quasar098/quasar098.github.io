@@ -39,19 +39,29 @@ h5 {
   margin: 2px;
   text-align: center;
 }
-div.menu {
-  background-color: #FFFFFF;
+div.block {
+	background-color: #FFFFFF;
+	box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
+	filter: blur();
+	border-radius: 20px;
+}
+div.top-bar {
+	display: flex;
+	align-items: center;
+	column-gap: 10%;
+}
+div#control-div {
+
+	width: 20%;
+}
+div#menu {
   width: 75%;
-  margin-left: 12.5%;
-  border-radius: 20px;
   transition-duration: 0.3s;
   user-select: none;
   display: flex;
   align-items: center;
-  box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
-  filter: blur();
 }
-.fa {
+#copy {
   vertical-align: middle;
   margin: 3px;
   margin-right: auto;
@@ -61,13 +71,14 @@ div.menu {
   padding-right: 5px;
   transition: 0.3s;
 }
-.fa:hover {
+#copy:hover {
 	font-size: 30px !important;
 	padding-top: 5px;
 }
 .menu:hover {
   width: 80%;
-  margin-left: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 img {
   position: absolute;
