@@ -14,7 +14,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function relocate(_) {
-  _.style.top = getRandomArbitrary(10, 80) + "%";
+  _.style.top = getRandomArbitrary(20, 80) + "%";
   _.style.left = getRandomArbitrary(10, 90) + "%";
 }
 
