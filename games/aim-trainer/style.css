@@ -1,0 +1,56 @@
+body {
+  background: linear-gradient(to top left, #CFFFD9 20%, #ADF7B6 100%);
+  width: 90%;
+  height: 90%;
+  margin-left: 5%;
+  margin-top: 1%;
+  user-select: none;
+}
+html {
+  height: 100%;
+  width: 100%;
+}
+p {
+  font-size: 36px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: bold;
+  margin: 2px;
+}
+.centered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+h2 {
+  font-size: 48px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: bold;
+  margin: 2px;
+  text-align: center;
+}
+h5 {
+  font-size: 20px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: bold;
+  margin: 2px;
+  text-align: center;
+}
+div.menu {
+  background-color: #FFFFFF;
+  width: 75%;
+  margin-left: 12.5%;
+  border-radius: 20px;
+  transition-duration: 0.3s;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
+  filter: blur();
+}
+.menu:hover {
+  width: 80%;
+  margin-left: 10%;
+}
+img {
+  position: absolute;
+}
