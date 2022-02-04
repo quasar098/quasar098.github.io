@@ -2,7 +2,8 @@ const restartMenu = document.getElementsByClassName("menu")[0];
 const restartText = document.getElementById("restartText");
 const scoreText = document.getElementById("scoreText");
 const timeText = document.getElementById("timeText");
-const gameOverText = document.getElementById("game-over-div");
+const gameOverDiv = document.getElementById("game-over-div");
+const copyButton = document.getElementById("copy");
 const startTime = 30;
 let targets = [];
 let score = 0;
@@ -21,7 +22,7 @@ function relocate(_) {
 for (let addTarget of document.getElementsByClassName("target")) {
   addTarget.addEventListener("mousedown", (event) => {
     if (event.button == 0) {
-      if (time == 0) {
+      if (time == 0.0) {
         return;
       }
       if (score == 0) {
@@ -39,9 +40,11 @@ for (let addTarget of document.getElementsByClassName("target")) {
 
 function timerClick() {
   time -= 1;
+  if (time == 0) {
+  	changeGameOverText(true);
+  }
   if (time == -1) {
     time += 1;
-    gameOverText.hidden = false;
     clearInterval(timerID);
   }
   redoText();
@@ -66,6 +69,21 @@ restartMenu.addEventListener("mousedown", (event) => {
   }
 });
 
+copyButton.addEventListener("mousedown", (event) => {
+	if (event.button == 0) {
+		navigator.clipboard.writeText("QUASAR's Aim Trainer - score: " + score + " - time: " + startTime);
+		restartText.innerHTML = "Copied to clipboard";
+	}
+})
+
+function changeGameOverText(hidden) {
+	if (!hidden) {
+		gameOverDiv.style.display = "none";
+	} else {
+		gameOverDiv.style.display = "flex";
+	}
+}
+
 function restart() {
   for (let target of targets) {
     relocate(target);
@@ -74,6 +92,6 @@ function restart() {
   clearInterval(timerID);
   time = startTime;
   redoText();
-  gameOverText.hidden = true;
+  changeGameOverText(false);
 }
 restart();
