@@ -50,8 +50,10 @@ div.top-bar {
 	align-items: center;
 	column-gap: 10%;
 }
-div#control-div {
-
+div#time-div {
+	width: 20%;
+}
+div#score-div {
 	width: 20%;
 }
 div#menu {
@@ -59,6 +61,7 @@ div#menu {
   transition-duration: 0.3s;
   user-select: none;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 #copy {
