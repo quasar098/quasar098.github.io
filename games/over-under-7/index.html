@@ -5,10 +5,17 @@
     <title>Over under 7 game</title>
   </head>
   <body>
-    <h1>Over Under Game</h1>
-    <div id="inputs-div">
-      <input type="number" id="bet-amount" min="1" max="1000">
+    <div id="bg-div">
+      <h1>Over Under Game</h1>
+      <div id="inputs-div">
+        <p>Bet amount: </p>
+        <input type="number" id="bet-amount" min="1" max="1000">
+        <div id="dice-div">
+          <img src="images/dice-1.png" alt="">
+          <button id="reroll">Reroll</button>
+        </div>
+      </div>
+      <script src="script.js" charset="utf-8"></script>
     </div>
-    <script src="script.js" charset="utf-8"></script>
   </body>
 </html>

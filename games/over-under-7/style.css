@@ -4,8 +4,13 @@ html {
 }
 body {
   width: 90%;
+  height: 100%;
   margin: auto;
   background: linear-gradient(to bottom right, #9d9abc, #6457a6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
 }
 p {
   font-family: Arial;
@@ -16,17 +21,76 @@ h1 {
   font-size: 50px;
   width: 100%;
   text-align: center;
+  margin: 3px;
+  margin-top: 20px;
+}
+div#bg-div {
+  border-radius: 20px;
+  background-color: #FFFFFFDD;
+  height: 80%;
+  width: 100%;
+  box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
+  filter: blur();
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 div#inputs-div {
   border-radius: 20px;
   background-color: #FFFFFFFD;
-  height: 500px;
+  width: 90%;
   box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
   filter: blur();
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 input {
   width: 25%;
   height: 10%;
-  margin-left:
+  font-size: 34px;
+  border-color: #000000AA;
+  border-style: groove;
+  border-radius: 10px;
+  border-width: 3px;
+  box-shadow: 0px 3px 2rem rgb(0 0 0 / 10%);
+  filter: blur();
+  transition: 0.4s;
+}
+input:hover {
+  width: 26%;
+}
+img {
+  border-radius: 20px;
+  box-shadow: 0px 1px 1rem rgb(0 0 0 / 40%);
+  filter: blur();
+  height: 50%;
+}
+div#dice-div {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+button#reroll {
+  margin-left: 20px;
+  height: 40px;
+  font-size: 30px;
+  background-color: #FFFFFF;
+  border-color: #000000AA;
+  border-style: groove;
+  border-radius: 7px;
+  border-width: 2px;
+  box-shadow: 0px 3px 2rem rgb(0 0 0 / 10%);
+  filter: blur();
+  transition-duration: 0.1s;
+}
+button#reroll:hover {
+  margin-bottom: 10px;
+}
+button#reroll:active {
+  border-color: #DDDDDDDD;
 }
