@@ -1,0 +1,26 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  width: 90%;
+  margin: auto;
+  background: linear-gradient(to bottom right, #9d9abc, #6457a6);
+}
+p {
+  font-family: Arial;
+  font-size: 30px;
+}
+h1 {
+  font-family: Arial;
+  font-size: 50px;
+  width: 100%;
+  text-align: center;
+}
+div#inputs-div {
+  border-radius: 20px;
+  background-color: #FFFFFFFD;
+  height: 500px;
+  box-shadow: 0px 1px 1rem rgb(0 0 0 / 10%);
+  filter: blur();
+}
