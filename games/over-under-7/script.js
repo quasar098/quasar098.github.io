@@ -20,8 +20,14 @@ function randInt(a, b) {
 }
 
 function setDice(num1, num2) {
-  dice1.src = "images/dice-" + num1 + ".png"
-  dice2.src = "images/dice-" + num2 + ".png"
+  dice1.src = "images/dice-" + num1 + ".png";
+  dice2.src = "images/dice-" + num2 + ".png";
+  dice1.classList.remove("poppy");
+  dice2.classList.remove("poppy");
+  setTimeout(() => {
+    dice1.classList.add("poppy");
+    dice2.classList.add("poppy");
+  }, 2);
 }
 
 function doesWin(i1, i2) {

@@ -71,7 +71,6 @@ img {
   box-shadow: 0px 1px 1rem rgb(0 0 0 / 40%);
   filter: blur();
   height: 60%;
-  animation: dice-pop 0.2s;
 }
 div#dice-div {
   display: flex;
@@ -105,6 +104,9 @@ select {
   filter: blur();
   height: 10%;
   font-size: 30px;
+}
+.poppy {
+  animation: dice-pop 0.2s;
 }
 @keyframes dice-pop {
   from {
