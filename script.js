@@ -1,1 +1,3 @@
-console.log(123);
+const downloadCows = document.getElementById("downloadCows");
+
+downloadCows. 
