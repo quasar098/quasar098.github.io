@@ -15,6 +15,8 @@ body {
 p {
   font-family: Arial;
   font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 h1 {
   font-family: Arial;
@@ -90,6 +92,19 @@ button#reroll {
   box-shadow: 0px 3px 2rem rgb(0 0 0 / 10%);
   filter: blur();
   transition-duration: 0s;
+}
+select {
+  margin-top: 5px;
+  width: 30%;
+  background-color: #FFFFFF;
+  border-color: #000000AA;
+  border-style: groove;
+  border-radius: 10px;
+  border-width: 3px;
+  box-shadow: 0px 3px 2rem rgb(0 0 0 / 10%);
+  filter: blur();
+  height: 10%;
+  font-size: 30px;
 }
 @keyframes dice-pop {
   from {

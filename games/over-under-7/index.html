@@ -10,6 +10,12 @@
       <div id="inputs-div">
         <p>Bet amount: </p>
         <input type="number" id="bet-amount" min="1" max="1000">
+        <p>Betting on: </p>
+        <select id="dropdown">
+          <option value="over">Roll > 7</option>
+          <option value="under">Roll < 7</option>
+          <option value="equal">Roll = 7 (x2 points!)</option>
+        </select>
         <p id="money">Your money: $100</p>
         <button id="reroll">Reroll</button>
         <div id="dice-div">
