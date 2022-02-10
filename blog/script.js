@@ -13,14 +13,12 @@ function addBlogPost(title, messages, date) {
   blogTitle.innerHTML = title;
 
   blogMessages = document.createElement("p");
-  if (typeof(blogMessages) == "string") {
-    blogMessages.innerHTML += messages.replaceAll("\\n", "<br>");
-  } else {
+  console.log(typeof(blogMessages));
+
     for (var i = 0; i < messages.length; i++) {
       blogMessages.innerHTML += messages[i];
       blogMessages.innerHTML += "<br>";
     }
-  }
 
   blogDate = document.createElement("h4");
   blogDate.classList.add("date");
@@ -33,4 +31,4 @@ function addBlogPost(title, messages, date) {
 }
 
 addBlogPost("Bruh", ["Among us", "sussy baka", "inwaeoidoin"], "02-10-2022");
-addBlogPost("Bruh", "I eat pasta \n everyday", "02-10-2022");  // TODO: fix this!!
+addBlogPost("Bruh", ['I eat pasta', 'everyday'], "02-10-2022");  // TODO: fix this!!
