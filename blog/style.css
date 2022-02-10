@@ -63,5 +63,24 @@ h4.date {
   font-family: Arial;
   margin-top: 5px;
   margin-left: 10px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
+}
+h2.title {
+  font-size: 36px;
+  font-family: Arial;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.blog-in-anim {
+  animation-duration: 0.5s;
+  animation-name: blog-in-anim;
+}
+@keyframes blog-in-anim {
+  from {
+    margin-left: 60px;
+  }
+  to {
+    margin-left: 30px;
+  }
 }
