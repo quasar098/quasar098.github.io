@@ -39,7 +39,6 @@ h1 {
   top: 0px;
 }
 #blog-posts {
-  height: calc(100% - 60px);
   display: flex;
   flex-direction: column;
   padding-top: 60px;
