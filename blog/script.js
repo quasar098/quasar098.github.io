@@ -30,5 +30,5 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
-addBlogPost("Bruh", ["Among us", "sussy baka", "inwaeoidoin"], "02-10-2022");
-addBlogPost("Bruh", ['I eat pasta', 'everyday'], "02-10-2022");
+addBlogPost("Bruh", ["What do you want me to put on my blog?", "mmmMMmmmm"], "02-11-2022");
+addBlogPost("Bruh", ['I eat pasta', 'every week'], "02-10-2022");
