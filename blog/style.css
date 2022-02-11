@@ -45,7 +45,8 @@ h1 {
   padding-top: 60px;
 }
 .blog-post {
-  margin: 30px;
+  margin: 20px;
+  margin-bottom: 0px;
   border-radius: 20px;
   background-color: #FFFFFFDD;
   filter: blur();

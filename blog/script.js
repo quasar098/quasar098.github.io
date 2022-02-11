@@ -13,7 +13,6 @@ function addBlogPost(title, messages, date) {
   blogTitle.innerHTML = title;
 
   blogMessages = document.createElement("p");
-  console.log(typeof(blogMessages));
 
     for (var i = 0; i < messages.length; i++) {
       blogMessages.innerHTML += messages[i];
@@ -30,5 +29,6 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
-addBlogPost("Bruh", ["What do you want me to put on my blog?", "mmmMMmmmm"], "02-11-2022");
-addBlogPost("Bruh", ['I eat pasta', 'every week'], "02-10-2022");
+addBlogPost("reporting 1", ["I am on a bus right now,", "it\'s the bus I am on goes back to where I live.", "The problem is that I live"], "02-11-2022");
+addBlogPost("conversation 1", ["I said: What do you want me to put on my blog?", "He said: mmmMMmmmm..."], "02-11-2022");
+addBlogPost("pasta person", ['I eat pasta', 'at least once', 'every week', '(it\'s a lot of pasta)'], "02-10-2022");
