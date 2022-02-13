@@ -25,7 +25,17 @@ function timer() {
 }
 
 
-document.addEventListener("pointerdown", (e) => {  // make it work with mobile devices
+document.addEventListener("touchstart", (e) => {  // make it work with mobile devices
+	running = !running;
+	if (running) {
+		prevTimer = setInterval(timer, 1000);
+		statsText.innerHTML = "running";
+	} else {
+		clearInterval(prevTimer);
+		statsText.innerHTML = "paused";
+	}
+});
+document.addEventListener("pointerdown", (e) => { 
 	running = !running;
 	if (running) {
 		prevTimer = setInterval(timer, 1000);
