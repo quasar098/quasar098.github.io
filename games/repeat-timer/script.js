@@ -25,7 +25,7 @@ function timer() {
 }
 
 
-document.addEventListener("touchstart", (e) => {  // make it work with mobile devices
+document.getElementById('divv').addEventListener("touchstart", (e) => {  // make it work with mobile devices
 	running = !running;
 	if (running) {
 		prevTimer = setInterval(timer, 1000);
@@ -35,7 +35,7 @@ document.addEventListener("touchstart", (e) => {  // make it work with mobile de
 		statsText.innerHTML = "paused";
 	}
 });
-document.addEventListener("pointerdown", (e) => { 
+document.getElementById('divv').addEventListener("pointerdown", (e) => {
 	running = !running;
 	if (running) {
 		prevTimer = setInterval(timer, 1000);
