@@ -69,3 +69,14 @@ document.getElementById('divv').addEventListener("webkitforcemousedown", (e) => 
 	}
 	statsText.innerHTML = "webkitforcemousedown";
 });
+document.getElementById('divv').addEventListener("click", (e) => {
+	running = !running;
+	if (running) {
+		prevTimer = setInterval(timer, 1000);
+		statsText.innerHTML = "running";
+	} else {
+		clearInterval(prevTimer);
+		statsText.innerHTML = "paused";
+	}
+	statsText.innerHTML = "click";
+});
