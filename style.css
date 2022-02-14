@@ -12,7 +12,6 @@ p {
 	font-size: 20px;
 	font-family: arial;
 	color: black;
-	margin: auto 0 auto auto;
 	display: table-cell;
 	vertical-align: middle;
 	padding: 10px;
@@ -34,22 +33,21 @@ h2 {
 }
 button {
 	background-color: #c3ffff;
-	font-size: 30px;
+	font-size: 20px;
 	font-family: arial;
-	width: 23%;
-	margin: 0 auto 0 12px;
 	display: table;
 	border-radius: 5px;
-	height: 120px;
 	padding-top: 40px;
 	padding-bottom: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 20px;
 	transition-duration: 0.5s;
 	box-shadow: 0 1rem 3rem rgb(0 0 0 / 25%);
 	filter: blur();
 }
 button:hover {
-	font-size: 36px;
-	width: 26%;
+	font-size: 24px;
 }
 .wide {
 	width: 100%;
@@ -59,6 +57,7 @@ button:hover {
 	align-items: center;
 	box-shadow: 0 1rem 1rem rgb(0 0 0 / 5%);
 	filter: blur();
+	justify-content: center;
 }
 ol {
 	list-style-type: inherit;
