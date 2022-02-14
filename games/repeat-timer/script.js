@@ -34,6 +34,7 @@ document.getElementById('divv').addEventListener("touchstart", (e) => {  // make
 		clearInterval(prevTimer);
 		statsText.innerHTML = "paused";
 	}
+	statsText.innerHTML = "touchstart";
 });
 document.getElementById('divv').addEventListener("pointerdown", (e) => {
 	running = !running;
@@ -44,4 +45,27 @@ document.getElementById('divv').addEventListener("pointerdown", (e) => {
 		clearInterval(prevTimer);
 		statsText.innerHTML = "paused";
 	}
+	statsText.innerHTML = "pointerdown";
+});
+document.getElementById('divv').addEventListener("mousedown", (e) => {
+	running = !running;
+	if (running) {
+		prevTimer = setInterval(timer, 1000);
+		statsText.innerHTML = "running";
+	} else {
+		clearInterval(prevTimer);
+		statsText.innerHTML = "paused";
+	}
+	statsText.innerHTML = "mousedown";
+});
+document.getElementById('divv').addEventListener("webkitforcemousedown", (e) => {
+	running = !running;
+	if (running) {
+		prevTimer = setInterval(timer, 1000);
+		statsText.innerHTML = "running";
+	} else {
+		clearInterval(prevTimer);
+		statsText.innerHTML = "paused";
+	}
+	statsText.innerHTML = "webkitforcemousedown";
 });
