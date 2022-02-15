@@ -14,12 +14,9 @@ function timer() {
 		setTimeout(() => {
 					beep.play();
 		}, 600);
-
-
 	}
 	if (time == 0) {
 		time = baseTime;
-
 	}
 	timerText.innerHTML = time;
 }
