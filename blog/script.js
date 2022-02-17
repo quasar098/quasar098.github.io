@@ -29,6 +29,8 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("nearly there", ["Not quite.", "Everyone said so,", "but we saw", "just nearly there"], "2-17-2022");
+addBlogPost("conversation 2", ["He said: puddle.", "I said: Have you tried?"], "2-17-2022");
 addBlogPost("reporting 4", ["I usually sit in the lobby", "on a chair", "perfect"], "2-15-2022");
 addBlogPost("reporting 3", ["I usually sit at the end of the table.", "I am sitting in the middle"], "2-14-2022");
 addBlogPost("reporting 2", ["I ate a falafel sandwich for dinner yesterday evening.", "It was very tasty.", "10/10 would eat again"], "02-13-2022");
