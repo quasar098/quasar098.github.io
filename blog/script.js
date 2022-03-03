@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("reporting 6", ["I'm back at the beginning again", "again I am"], "3-3-2022");
 addBlogPost("reporting 5", ["I will be Gone,", "gone for a long time.", "Until the day of the end.", "Then I will be back again."], "2-20-2022");
 addBlogPost("nearly there", ["Not quite.", "Everyone said so,", "but we saw", "just nearly there"], "2-17-2022");
 addBlogPost("conversation 2", ["He said: puddle.", "I said: Have you tried?"], "2-17-2022");
