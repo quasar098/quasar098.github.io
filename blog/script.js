@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("numbers", ["Three is bigger than two only in numbers", "The one who decided it was", "before it wasn't"], "03-10-2022");
 addBlogPost("boxes", ["Boxes are falling", "Boxes aren't presents", "They are bombs"], "03-8-2022")
 addBlogPost("pasta update", ["I brought a thermos today", "it kept the pasta warm", "not warm enough but warm", "I'm not sure if it is good enough"], "03-07-2022");
 addBlogPost("reporting 6", ["I'm back at the beginning again", "again I am"], "03-3-2022");
