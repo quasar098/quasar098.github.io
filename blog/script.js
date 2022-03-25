@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("inverse square law", ["Focus is definition of september"], "03-25-2022");
 addBlogPost("bigger and smaller", ["I said I was bigger than him", "But only relatively"], "3-21-2022");
 addBlogPost("stairs of sadness", ["I take my walk down the stairs of sadness"], "03-17-2022");
 addBlogPost("numbers", ["Three is bigger than two only in numbers", "The one who decided it was", "before it wasn't"], "03-10-2022");

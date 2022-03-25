@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>qr code thing to enter school</title>
+        <style media="screen">
+            html {
+                width: 100%;
+                height: 100%;
+            }
+            body {
+                margin: 0px;
+                width: 100%;
+                height: 100%;
+                background-color: rgb(255, 255, 255);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            svg {
+                height: 400px;
+                width: 400px;
+            }
+            h1 {
+                font-family: Arial;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Ruvna</h1>
+        <script type="text/javascript" src="qr-gen.js">
+        </script>
+        <script type="text/javascript">
+            const QRC = qrcodegen.QrCode;
+            const parser = new DOMParser();
+            function toSvgString(qr, border, lightColor, darkColor) {
+                lightColor = "#FFFFFF";
+                darkColor = "#000000";
+                if (border < 0)
+                    throw new RangeError("Border must be non-negative");
+                let parts = [];
+                for (let y = 0; y < qr.size; y++) {
+                    for (let x = 0; x < qr.size; x++) {
+                        if (qr.getModule(x, y))
+                            parts.push(`M${x + border},${y + border}h1v1h-1z`);
+                    }
+                }
+                return `<?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${qr.size + border * 2} ${qr.size + border * 2}" stroke="none">
+                <rect width="100%" height="100%" fill="${lightColor}"/>
+                <path d="${parts.join(" ")}" fill="${darkColor}"/>
+                </svg>
+                `
+            }
+
+            let enctext = "";
+            req = new XMLHttpRequest();
+            req.onload = ((r) => {
+                let _ = JSON.parse(r.target.responseText).responses[0];
+
+                const qr0 = QRC.encodeText(enctext, QRC.Ecc.HIGH);
+                let svg = toSvgString(qr0, 4);
+
+                var doc = parser.parseFromString(svg, "image/svg+xml");
+                document.body.appendChild(doc.children[0]);
+            });
+            // https://prdelb.ruvna.com/v1/sbsdvt/surveys/form?sent_key=sdyx2v&instance_id=1054
+            req.open("GET", "https://cors-anywhere.herokuapp.com/https://prdelb.ruvna.com/v1/sbsdvt/surveys/form?sent_key=sdyx2v&instance_id=1054", true);
+            req.send();
+
+        </script>
+    </body>
+</html>
