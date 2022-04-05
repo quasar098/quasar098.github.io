@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Count number of string seq</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Count number of string sequence</h1>
+		<div>
+			<p>string you are scanning for</p>
+			<input type="text" name="char" cols="119" rows="2" id="seqScan">
+		</div>
+		<div>
+			<textarea name="paragraph_text" cols="119" rows="15" id="text"></textarea>
+		</div>
+		<div>
+			<button type="button" name="button" id="button">
+				<p>do the task</p>
+			</button>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('button').addEventListener("click", () => {
+				alert("There are " + (document.getElementById('text').value.split(document.getElementById('seqScan').value).length-1) + " of the string");
+			});
+		</script>
+	</body>
+</html>

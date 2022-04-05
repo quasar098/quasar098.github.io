@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Count words in a text</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Count number of words</h1>
+		<div>
+			<textarea name="paragraph_text" cols="119" rows="15" id="text"></textarea>
+		</div>
+		<div>
+			<button type="button" name="button" id="button">
+				<p>do the task</p>
+			</button>
+		</div>
+		<script type="text/javascript">
+			function countWords(str) {
+				var nls = 0;
+			  	var arr = str.split(' ');
+			  	for (var _ in arr) {
+					var w = arr[_].split("\n").length;
+					if (w > 1) {
+						nls += w-1;
+					}
+			  	}
+			  	return arr.filter(word => word !== '').length + nls;
+			}
+			document.getElementById('button').addEventListener("click", () => {
+				alert("There are " + countWords(document.getElementById('text').value) + " words");
+			});
+		</script>
+	</body>
+</html>
