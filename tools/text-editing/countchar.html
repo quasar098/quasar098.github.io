@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Count number of specific char in text</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Count number of specific char</h1>
+		<div>
+			<textarea type="text" maxlength="1" name="char" cols="2" rows="2" id="charScan"></textarea>
+			<p>you are scanning for: <span id="out"></span> </p>
+		</div>
+		<div>
+			<textarea name="paragraph_text" cols="119" rows="15" id="text"></textarea>
+		</div>
+		<div>
+			<button type="button" name="button" id="button">
+				<p>do the task</p>
+			</button>
+		</div>
+		<script type="text/javascript">
+			let scan = document.getElementById('charScan');
+			let paragraph = document.getElementById('text');
+			let out = document.getElementById('out');
+			document.getElementById('button').addEventListener("click", (e) => {
+				alert("There are " + (paragraph.value.split(scan.value).length - 1) + " copies of the char in this");
+			})
+			setInterval(() => {
+				out.innerHTML = scan.value;
+				if (scan.value == "\n") {
+					out.innerHTML = "\\n";
+				}
+			}, 200);
+		</script>
+	</body>
+</html>

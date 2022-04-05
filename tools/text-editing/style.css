@@ -1,0 +1,27 @@
+/*doc stuff*/
+html {
+	width: 100%;
+}
+body {
+	width: calc(100% - 16px);
+	min-height: 100%;
+}
+li {
+	font-family: Helvetica;
+}
+.columned {
+	float: left
+}
+/*text stuff*/
+h1 {
+	font-family: Helvetica
+}
+h2 {
+	font-family: Helvetica
+}
+h3 {
+	font-family: Helvetica
+}
+p {
+	font-family: Helvetica
+}
