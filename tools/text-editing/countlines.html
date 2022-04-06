@@ -6,12 +6,7 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<h1>Count number of specific character</h1>
-		<div>
-			<p>character</p>
-			<textarea type="text" maxlength="1" name="char" cols="2" rows="2" id="charScan"></textarea>
-			<p>you are scanning for: <span id="out"></span> </p>
-		</div>
+		<h1>Count number of lines</h1>
 		<div>
 			<textarea name="paragraph_text" cols="119" rows="15" id="text"></textarea>
 		</div>
@@ -21,18 +16,24 @@
 			</button>
 		</div>
 		<script type="text/javascript">
-			let scan = document.getElementById('charScan');
+			scan = {
+				value: "\n"
+			}
 			let paragraph = document.getElementById('text');
-			let out = document.getElementById('out');
 			document.getElementById('button').addEventListener("click", (e) => {
-				alert("There are " + (paragraph.value.split(scan.value).length - 1) + " copies of the char in this");
-			})
-			setInterval(() => {
-				out.innerHTML = scan.value;
-				if (scan.value == "\n") {
-					out.innerHTML = "\\n";
+				let _ = paragraph.value.split(scan.value).length
+				if (paragraph.value == "") {
+					_ = 0
 				}
-			}, 200);
+				let text = "There are " + _ + " lines";
+				if (_ == 1) {
+					text = "There is one line";
+				}
+				if (_ == 0) {
+					text = "No lines??" // no bches reference
+				}
+				alert(text);
+			})
 		</script>
 	</body>
 </html>

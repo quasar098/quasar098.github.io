@@ -1,6 +1,8 @@
 /*doc stuff*/
 html {
 	width: 100%;
+	min-height: 100%;
+	height: inherit;
 }
 body {
 	width: calc(100% - 16px);
@@ -24,4 +26,14 @@ h3 {
 }
 p {
 	font-family: Helvetica
+}
+a {
+	transition-duration: 0.1s;
+	text-decoration-color: #0000EE99;
+}
+a:visited {
+	color: #0000EE;
+}
+a:hover {
+	color: #0099EE;
 }

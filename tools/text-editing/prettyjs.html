@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Pretty Print JS Code</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Pretty Print JS Code</h1>
+		<div>
+			<textarea name="paragraph_text" cols="119" rows="15" id="text" spellcheck="false"></textarea>
+		</div>
+		<div>
+			<button type="button" name="button" id="button">
+				<p>do the task</p>
+			</button>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.2/beautify.js"></script>
+		<script type="text/javascript">
+			const button = document.getElementById('button');
+			const text = document.getElementById('text');
+			button.addEventListener("click", () => {
+				var new_text = js_beautify(text.value);
+				text.value = new_text;
+			});
+		</script>
+	</body>
+</html>
