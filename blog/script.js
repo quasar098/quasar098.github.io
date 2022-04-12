@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("in kahoots", ["Kahoot. Kahooter.", '"I will click the triangle"', "I always choose wrong..."]. "04-12-2022")
 addBlogPost("tall guy", ["very tall", "back to nintendo", "rolling around in", "miyamoto's grave"], "04-06-2022");
 addBlogPost("siblings", ["sine and cosine could be", "Brothers and Sisters", "We would never know for sure,", "while in different phases"], "04-05-2022");
 addBlogPost("inverse square law", ["Focus is definition of september"], "03-25-2022");
