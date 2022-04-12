@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Replace string in text</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1>Replace string in text</h1>
+		<div>
+			<input type="text" name="char" cols="119" rows="2" id="seqScan" placeholder="find">
+			<input type="text" name="char" cols="119" rows="2" id="replaceWith" placeholder="replace with">
+		</div>
+		<div>
+			<textarea name="paragraph_text" cols="119" rows="15" id="text"></textarea>
+		</div>
+		<div>
+			<button type="button" name="button" id="button">
+				<p>do the task</p>
+			</button>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('button').addEventListener("click", () => {
+				document.getElementById('text').value = document.getElementById('text').value.replaceAll(document.getElementById('seqScan').value, document.getElementById('replaceWith').value);
+			});
+		</script>
+	</body>
+</html>
