@@ -29,7 +29,8 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
-addBlogPost("short guy", ["walked into sega", "sonic caught ecoli", "hyper and contracted", "sega'd"], "04-12-2022")
+addBlogPost("title @p title", ["I walked in", "said,", '"/title @p title @p title @p title @p title @p title"'], "04-12-2022");
+addBlogPost("short guy", ["walked into sega", "sonic caught ecoli", "hyper and contracted", "sega'd"], "04-12-2022");
 addBlogPost("the toaster", ["I got a toaster", "I burn't my toaster", "There goes the toaster"], "04-12-2022");
 addBlogPost("in kahoots", ["Kahoot. Kahooter.", '"I will click the triangle"', "I always choose wrong..."], "04-11-2022");
 addBlogPost("tall guy", ["very tall", "back to nintendo", "rolling around in", "miyamoto's grave"], "04-06-2022");
