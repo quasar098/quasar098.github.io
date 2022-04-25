@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("monkeys on the globe", ["we are all monkeys", "walking around on the globe", "giving paper and stealing paper from each other"], "04-25-2022");
 addBlogPost("title @p title", ["I walked in", "said,", '"/title @p title @p title @p title @p title @p title"'], "04-12-2022");
 addBlogPost("short guy", ["walked into sega", "sonic caught ecoli", "hyper and contracted", "sega'd"], "04-12-2022");
 addBlogPost("the toaster", ["I got a toaster", "I burn't my toaster", "There goes the toaster"], "04-12-2022");
@@ -39,7 +40,7 @@ addBlogPost("inverse square law", ["Focus is definition of september"], "03-25-2
 addBlogPost("bigger and smaller", ["I said I was bigger than him", "But only relatively"], "3-21-2022");
 addBlogPost("stairs of sadness", ["I take my walk down the stairs of sadness"], "03-17-2022");
 addBlogPost("numbers", ["Three is bigger than two only in numbers", "The one who decided it was", "before it wasn't"], "03-10-2022");
-addBlogPost("boxes", ["Boxes are falling", "Boxes aren't presents", "They are bombs"], "03-8-2022")
+addBlogPost("boxes", ["Boxes are falling", "Boxes aren't presents", "They are bombs"], "03-08-2022")
 addBlogPost("pasta update", ["I brought a thermos today", "it kept the pasta warm", "not warm enough but warm", "I'm not sure if it is good enough"], "03-07-2022");
 addBlogPost("reporting 6", ["I'm back at the beginning again", "again I am"], "03-3-2022");
 addBlogPost("reporting 5", ["I will be Gone,", "gone for a long time.", "Until the day of the end.", "Then I will be back again."], "02-20-2022");
