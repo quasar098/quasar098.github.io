@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>online editor</title>
+		<style type="text/css" media="screen">
+			#editor {
+				position: absolute;
+				top: 100px;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+			body {
+				background-color: #2F3129;
+			}
+			p {
+				font-family: Arial;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="display: inline-block;">
+			<div class="">
+				<p>set language</p>
+			</div>
+			<div class="">
+				<select name="cars" id="lang" onchange='editor.session.setMode("ace/mode/" + document.getElementById("lang").value);'>
+				  <option value="javascript">JS</option>
+				  <option value="python">Python</option>
+				  <option value="c_cpp">C</option>
+				  <option value="c_cpp">C++</option>
+				  <option value="rust">Rust</option>
+		  		  <option value="ruby">Ruby</option>
+		  		  <option value="lua">Lua</option>
+		  		  <option value="json">JSON</option>
+		  		  <option value="haskell">Haskell</option>
+		  		  <option value="batchfile">Batchfile</option>
+		  		  <option value="assembly_x86">ASMx86</option>
+		  		  <option value="markdown">Markdown</option>
+		  		  <option value="php">PHP</option>
+		  		  <option value="perl">Perl</option>
+		  		  <option value="r">R</option>
+		  		  <option value="svg">SVG</option>
+		  		  <option value="typescript">TS</option>
+		  		  <option value="xml">XML</option>
+				</select>
+			</div>
+		</div>
+		<div id="editor"></div>
+		<script src="./ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.session.setMode("ace/mode/javascript");
+			editor.setFontSize(14);
+		</script>
+	</body>
+</html>
