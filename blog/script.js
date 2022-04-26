@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("in the news", ["wealthy african buys bird", "he did it", "44,000,000,000", "free speech"], "04-26-2022");
 addBlogPost("pasta update 2", ["I brought elbow pasta today", "usually I bring swirly pasta", "it tasted fine", "fine enough to eat"], "04-25-2022");
 addBlogPost("capitalism got me down bad", ["welfare vs ubi", "stocks vs bonds", "poor vs rich", "capitalism vs communism"], "04-25-2022");
 addBlogPost("monkeys on the globe", ["we are all monkeys", "walking around on the globe", "giving paper and stealing paper from each other"], "04-25-2022");
