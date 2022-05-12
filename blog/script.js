@@ -29,6 +29,9 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("surveillance", ["there is always someone watching you"], "05-12-2022");
+addBlogPost("taboo", ["everything is controlled in our society", "talking", "walking", "stalking", "all controlled for their own entertainment"], "05-12-2022");
+addBlogPost("hammer and nail", ["hammer hits nail", "nails takes revenge", "no more hammer"], "05-12-2022");
 addBlogPost("in the news", ["wealthy african buys bird", "he did it", "44,000,000,000", "free speech"], "04-26-2022");
 addBlogPost("pasta update 2", ["I brought elbow pasta today", "usually I bring swirly pasta", "it tasted fine", "fine enough to eat"], "04-25-2022");
 addBlogPost("capitalism got me down bad", ["welfare vs ubi", "stocks vs bonds", "poor vs rich", "capitalism vs communism"], "04-25-2022");
@@ -38,9 +41,8 @@ addBlogPost("short guy", ["walked into sega", "sonic caught ecoli", "hyper and c
 addBlogPost("the toaster", ["I got a toaster", "I burn't my toaster", "There goes the toaster"], "04-12-2022");
 addBlogPost("in kahoots", ["Kahoot. Kahooter.", '"I will click the triangle"', "I always choose wrong..."], "04-11-2022");
 addBlogPost("tall guy", ["very tall", "back to nintendo", "rolling around in", "miyamoto's grave"], "04-06-2022");
-addBlogPost("siblings", ["sine and cosine could be", "Brothers and Sisters", "We would never know for sure,", "while in different phases"], "04-05-2022");
 addBlogPost("inverse square law", ["Focus is definition of september"], "03-25-2022");
-addBlogPost("bigger and smaller", ["I said I was bigger than him", "But only relatively"], "3-21-2022");
+addBlogPost("bigger and smaller", ["I said I was bigger than him", "He said I was short", "He was short"], "3-21-2022");
 addBlogPost("stairs of sadness", ["I take my walk down the stairs of sadness"], "03-17-2022");
 addBlogPost("numbers", ["Three is bigger than two only in numbers", "The one who decided it was", "before it wasn't"], "03-10-2022");
 addBlogPost("boxes", ["Boxes are falling", "Boxes aren't presents", "They are bombs"], "03-08-2022")
