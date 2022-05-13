@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("reporting 7", ["yet again at the table", "circle table", "people walk past me", "pasta me", "pasta"], "05-13-2022");
 addBlogPost("surveillance", ["there is always someone watching you"], "05-12-2022");
 addBlogPost("taboo", ["everything is controlled in our society", "talking", "walking", "stalking", "all controlled for their own entertainment"], "05-12-2022");
 addBlogPost("hammer and nail", ["hammer hits nail", "nails takes revenge", "no more hammer"], "05-12-2022");
