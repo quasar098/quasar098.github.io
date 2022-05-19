@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("mohammad ale", ["the punch", "the kick", "skrunkly the when"], "05-19-2022");
 addBlogPost("just super writing here", ["powerlanguage", "divides", "powergrammar", "powervocabulary", "powersentencestructure", "I have the power"], "05-16-2022");
 addBlogPost("reporting 7", ["yet again at the table", "circle table", "people walk past me", "pasta me", "pasta"], "05-13-2022");
 addBlogPost("surveillance", ["there is always someone watching you"], "05-12-2022");
