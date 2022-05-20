@@ -56,7 +56,7 @@ let buyableTasks = [];
 // packs stuff
 let possiblePacks = {
 	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["hut", "stick"]),
-	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "apple", "banana"],
+	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "apple", "banana"]),
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "hut": 1, "stick": 1}, ["human", "stick"])
 }
 
