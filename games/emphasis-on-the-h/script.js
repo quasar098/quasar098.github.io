@@ -105,6 +105,14 @@ function updatePacksList() {
 			}
 			updatePacksList();
 		});
+		let costArray = [];
+		for (let resourceName in link.pack.cost) {
+			for (index=0;index<link.pack.cost[resourceName];index++) {
+				costArray.push(resourceName);
+			}
+		}
+		elm.title = "cost: " + costArray.join(", ");
+		elm.title += " | get: ?"
 		return elm;
 	}
 	for (index in possiblePacks) {
@@ -205,4 +213,4 @@ setInterval(() => {
 	if (removeMe != undefined) {
 		currentTasks = currentTasks.splice(0, removeMe.name);
 	}
-}, 100);
+}, 200);
