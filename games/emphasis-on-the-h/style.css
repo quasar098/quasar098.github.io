@@ -1,0 +1,30 @@
+h1 {
+	font-family: Helvetica;
+	font-weight: bolder;
+	margin-top: 0px;
+}
+h2 {
+	font-family: Helvetica;
+}
+p {
+	font-family: Helvetica;
+}
+html {
+	height: 100%;
+	width: 100%;
+}
+body {
+	height: 100%;
+	margin: 0px;
+	width: 100%;
+	background-color: #22eedd;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+a {
+	color: #3355FF;
+}
+a:visited {
+	color: #3355FF;
+}
