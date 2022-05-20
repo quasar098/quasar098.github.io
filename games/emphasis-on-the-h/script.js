@@ -56,7 +56,7 @@ let buyableTasks = [];
 // packs stuff
 let possiblePacks = {
 	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["hut", "stick"]),
-	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "apple", "banana"]),
+	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "hut": 1, "stick": 1}, ["human", "stick"])
 }
 
@@ -154,6 +154,14 @@ function updateResources() {
 	}
 }
 
+function getIndexOfTask(name) {
+	for (index in currentTasks) {
+		if (currentTasks[index].name == name) {
+			return index;
+		}
+	}
+}
+
 function updateTasksList() {
 	buyableTasks = [];
 	removeAllChildNodes(tasksDiv);
@@ -197,7 +205,7 @@ updatePacksList();
 setInterval(() => {
 	updateResources();
 	updateTasksList();
-	let removeMe;
+	let removeMe = undefined;
 	for (index in currentTasks) {
 		currentTasks[index].time -= 0.1;
 		if (currentTasks[index].time < 0) {
@@ -211,6 +219,6 @@ setInterval(() => {
 		}
 	}
 	if (removeMe != undefined) {
-		currentTasks = currentTasks.splice(0, removeMe.name);
+		currentTasks.shift();
 	}
 }, 200);
