@@ -6,8 +6,14 @@ h1 {
 h2 {
 	font-family: Helvetica;
 }
+h3 {
+	font-family: Helvetica;
+	font-weight: bolder;
+}
 p {
 	font-family: Helvetica;
+	font-size: 16px;
+	width: max-content;
 }
 html {
 	height: 100%;
@@ -27,4 +33,58 @@ a {
 }
 a:visited {
 	color: #3355FF;
+}
+div.main {
+	display: inline-grid;
+	width: 80%;
+	grid-auto-flow: column;
+	padding-left: 10%;
+	padding-right: 10%;
+	column-gap: 100px;
+}
+div#pack-div {
+	background-color: #5EFFAE;
+	border-radius: 10px;
+	padding: 5px;
+	width: 100%;
+	box-shadow: 5px 5px 1rem rgb(0, 0, 0, 0.2);
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+	height: min-content;
+}
+progress {
+	margin-left: 10px;
+}
+div#pack-div:hover {
+	box-shadow: 11px 11px 1rem rgb(0, 0, 0, 0.2);
+}
+div#inv-div {
+	background-color: #5EFFAE;
+	border-radius: 10px;
+	padding: 5px;
+	width: 100%;
+	box-shadow: 5px 5px 1rem rgb(0, 0, 0, 0.2);
+	height: min-content;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+div#inv-div:hover {
+	box-shadow: 11px 11px 1rem rgb(0, 0, 0, 0.2);
+}
+div#task-div {
+	background-color: #5EFFAE;
+	border-radius: 10px;
+	padding: 5px;
+	width: 100%;
+	box-shadow: 5px 5px 1rem rgb(0, 0, 0, 0.2);
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+	height: min-content;
+}
+div#task-div:hover {
+	box-shadow: 11px 11px 1rem rgb(0, 0, 0, 0.2);
+}
+a {
+	text-decoration: underline;
+	cursor: pointer;
 }

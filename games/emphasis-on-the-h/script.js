@@ -1,5 +1,5 @@
 console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
-var index;
+let index;
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -10,11 +10,13 @@ class Task {
 		this.name = name;
 		this.time = time;
 		this.maxTime = time;
+		this._ = Math.random();
 	}
 }
 class Resource {
 	constructor(name) {
 		this.name = name;
+		this.assigned = undefined; // only for humans
 	}
 }
 class Pack {
@@ -22,12 +24,13 @@ class Pack {
 		this.name = name;
 		this.cost = cost;
 		this.get = get;
+		this.rewardDiscovered = false;
 	}
 
 	buyable() {
 		let resourcesCopy = [...resources];
 		for (let costItem in this.cost) {
-			if (!(getResource(costItem).length >= this.cost[costItem])) {
+			if (!(getResource(costItem, true).length >= this.cost[costItem])) {
 				return false;
 			}
 		}
@@ -35,6 +38,7 @@ class Pack {
 	}
 
 	buy() {
+		this.rewardDiscovered = true;
 		for (let costResource in this.cost) {
 			removeResource(costResource, this.cost[costResource]);
 		}
@@ -42,20 +46,40 @@ class Pack {
 			resources.push(new Resource(this.get[index]));
 		}
 	}
+
+	hoverHint() {
+		let hint = "";
+		let costArray = [];
+		for (let resourceName in this.cost) {
+			for (index=0;index<this.cost[resourceName];index++) {
+				costArray.push(resourceName);
+			}
+		}
+		hint = "cost: " + costArray.join(", ");
+		hint += " | get: "
+		if (this.rewardDiscovered) {
+			hint += this.get.join(", ");
+		} else {
+			hint += "?"
+		}
+		return hint;
+	}
 }
 
 // dom control
-let packsDiv = document.getElementById('pack-shop')
-let inventoryDiv = document.getElementById('inventory')
-let tasksDiv = document.getElementById('tasks')
+let packsDiv = document.getElementById('pack-shop');
+let inventoryDiv = document.getElementById('inventory');
+let tasksDiv = document.getElementById('tasks');
+let workIndicator = document.getElementById('work-indicator');
 
 // tasks stuff
 let currentTasks = [];
 let buyableTasks = [];
+let progressBars = [];
 
 // packs stuff
 let possiblePacks = {
-	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick"]),
+	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick", 'stick']),
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
 	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
@@ -82,10 +106,13 @@ function getTask(name) {
 	return currentTasks.filter(task => task.name == name);
 }
 
-function getResource(name) {
+function getResource(name, freehuman=false) {
 	let res = [];
 	for (index in resources) {
 		if (resources[index].name == name) {
+			if (freehuman & resources[index].assigned != undefined) {
+				continue;
+			}
 			res.push(resources[index]);
 		}
 	}
@@ -97,24 +124,18 @@ function updatePacksList() {
 	function createPack(name) {
 		let elm = document.createElement("p");
 		let link = document.createElement("a");
-		link.href = "javascript:void(0)";
 		link.innerHTML = name;
 		link.pack = possiblePacks[name];
 		elm.appendChild(link);
-		link.addEventListener("click", (e) => {
+		elm.addEventListener("click", (e) => {
 			if (e.target.pack.buyable()) {
 				e.target.pack.buy();
 			}
+			updateResources();
+			updateTasksList();
 			updatePacksList();
 		});
-		let costArray = [];
-		for (let resourceName in link.pack.cost) {
-			for (index=0;index<link.pack.cost[resourceName];index++) {
-				costArray.push(resourceName);
-			}
-		}
-		elm.title = "cost: " + costArray.join(", ");
-		elm.title += " | get: ?"
+		elm.title = link.pack.hoverHint();
 		return elm;
 	}
 	for (index in possiblePacks) {
@@ -123,48 +144,52 @@ function updatePacksList() {
 	}
 }
 
-function makeProgressBar(percentage) {
+function makeProgressBar(task) {
 	let progressBar = document.createElement("progress");
 	progressBar.max = "100";
-	progressBar.value = percentage;
+	progressBar.value = task.time/task.maxTime*100;
+	progressBar.task = task;
+	progressBars.push(progressBar);
 	return progressBar;
+}
+
+function addResource(name, amount) {
+	for (index=0;index<amount;index++) {
+		resources.push(new Resource(name));
+	}
+	updateResources();
+	updatePacksList();
+	updateTasksList();
+	return true;
 }
 
 function updateResources() {
 	removeAllChildNodes(inventoryDiv);
+	progressBars = [];
 	function createHtmlFromResource(res) {
 		let elm = document.createElement("p");
 		elm.innerHTML = res.name;
-		if (res.name == "tree") {
-			elm.title = "can get wood";
-			elm.innerHTML += " 🪵"
-			if (getTask("chop tree").length > 0) {
-				let task = getTask("chop tree")[0];
-				elm.appendChild(makeProgressBar(100*task.time/task.maxTime));
+		function appendGen(name, result, task) {
+			if (res.name == name) {
+				elm.title = "can get " + result;
+				elm.innerHTML += " [🛠 " + result + "]";
 			}
 		}
-		if (res.name == "mine") {
-			elm.title = "can get stone";
-			elm.innerHTML += " 🪨"
-			if (getTask("mine stone").length > 0) {
-				let task = getTask("mine stone")[0];
-				elm.appendChild(makeProgressBar(100*task.time/task.maxTime));
-			}
+		// append to resource generator name
+		appendGen("tree", "wood", "chop tree");
+		appendGen("mine", "stone", "mine stone");
+		appendGen("banana tree", "banana", "harvest banana");
+		appendGen("well", "water", "scoop water");
+		let task = res.assigned;
+		if (task != undefined) {
+			elm.appendChild(makeProgressBar(task));
 		}
-		if (res.name == "banana tree") {
-			elm.title = "can get banana for sten";
-			elm.innerHTML += " 🍌"
-			if (getTask("banana tree").length > 0) {
-				let task = getTask("banana tree")[0];
-				elm.appendChild(makeProgressBar(100*task.time/task.maxTime));
-			}
-		}
-		if (res.name == "") // todo this
 		return elm;
 	}
 	for (index in resources) {
 		inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 	}
+	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";
 }
 
 function getIndexOfTask(name) {
@@ -175,6 +200,16 @@ function getIndexOfTask(name) {
 	}
 }
 
+function nextFreeHuman() {
+	let humans = getResource("human")
+	for (index in humans) {
+		if (humans[index].assigned == undefined) {
+			return humans[index];
+		}
+	}
+	return {"task": undefined} // fake human
+}
+
 function updateTasksList() {
 	buyableTasks = [];
 	removeAllChildNodes(tasksDiv);
@@ -183,38 +218,38 @@ function updateTasksList() {
 		let link = document.createElement("a");
 		elm.appendChild(link);
 		link.innerHTML = name;
-		link.href = "javascript:void(0)";
-		if (name == "chop tree") {
-			link.addEventListener("click", () => {
-				currentTasks.push(new Task("chop tree", 10));
-			});
+		function addTaskIfBuyable(name2, time) {
+			if (name == name2) {
+				elm.addEventListener("click", () => {
+					let task2 = new Task(name, time);
+					currentTasks.push(task2);
+					nextFreeHuman().assigned = task2;
+					updateTasksList();
+					updateResources();
+				});
+			}
 		}
-		if (name == "mine stone") {
-			link.addEventListener("click", () => {
-				currentTasks.push(new Task("mine stone", 30));
-			});
-		}
-		if (name == "banana tree") {
-			link.addEventListener("click", () => {
-				currentTasks.push(new Task("banana tree", 30));
-			});
-		}
+		addTaskIfBuyable("chop tree", 5);
+		addTaskIfBuyable("mine stone", 8);
+		addTaskIfBuyable("harvest banana", 3);
+		addTaskIfBuyable("scoop water", 3);
 		return elm;
 	}
+	// can do tasks (enough humans available)
 	if (getResource("human").length > currentTasks.length) {
-		// can do tasks (enough humans available)
-		if (getResource("tree").length > 0) {
-			tasksDiv.appendChild(addTask("chop tree"))
+		// can do task (resource gen found)
+		function checkGen(nameOfGen, task) {
+			if (getResource(nameOfGen).length > 0) {
+				tasksDiv.appendChild(addTask(task))
+			}
 		}
-		if (getResource("mine").length > 0) {
-			tasksDiv.appendChild(addTask("mine stone"))
-		}
-		if (getResource("banana tree").length > 0) {
-			tasksDiv.appendChild(addTask("banana tree"))
-		}
+		checkGen("tree", "chop tree");
+		checkGen("mine", "mine stone");
+		checkGen("banana tree", "harvest banana");
+		checkGen("well", "scoop water");
 	} else {
 		let noTasksAvailable = document.createElement("p")
-		noTasksAvailable.innerHTML = "no tasks available";
+		noTasksAvailable.innerHTML = "all humans are working";
 		tasksDiv.appendChild(noTasksAvailable);
 	}
 }
@@ -223,26 +258,51 @@ updateResources();
 updateTasksList();
 updatePacksList();
 
-setInterval(() => {
-	updateResources();
-	updateTasksList();
-	let removeMe = undefined;
-	for (index in currentTasks) {
-		currentTasks[index].time -= 0.1;
-		if (currentTasks[index].time < 0) {
-			removeMe = currentTasks[index];
-			if (currentTasks[index].name == "chop tree") {
-				resources.push(new Resource("wood"));
-			}
-			if (currentTasks[index].name == "mine stone") {
-				resources.push(new Resource("stone"));
-			}
-			if (currentTasks[index].name == "banana tree") {
-				resources.push(new Resource("banana"));
+let updateInterval = 0.02;
+let speedMod = 10;
+
+function unAssignTasks(task) {
+	let humans = getResource("human");
+	for (index in humans) {
+		if (humans[index].assigned != undefined) {
+			if (humans[index].assigned.time <= 0) {
+				humans[index].assigned = undefined;
 			}
 		}
 	}
-	if (removeMe != undefined) {
-		currentTasks.shift();
+}
+
+setInterval(() => {
+	for (index in progressBars) {
+		let progressBar = progressBars[index];
+		progressBar.value -= updateInterval/progressBar.task.maxTime*100 * speedMod;
+		if (progressBar.value <= 0) {
+			progressBars.shift();
+			progressBar.parentElement.removeChild(progressBar);
+		}
 	}
-}, 200);
+	let removeMe = undefined;
+	for (index in currentTasks) {
+		currentTasks[index].time -= updateInterval * speedMod;
+		if (currentTasks[index].time < 0) {
+			removeMe = currentTasks[index];
+			function giveReward(taskName, awardName) {
+				if (currentTasks[index].name == taskName) {
+					resources.push(new Resource(awardName));
+				}
+			}
+			giveReward("chop tree", "wood");
+			giveReward("mine stone", "stone");
+			giveReward("harvest banana", "banana");
+			giveReward("scoop water", "water");
+		}
+	}
+	if (removeMe != undefined) {
+		unAssignTasks();
+		currentTasks.shift();
+		updatePacksList();
+		updateTasksList();
+		updateResources();
+	}
+}, 1000*updateInterval);
+document.body.style.userSelect = "none";
