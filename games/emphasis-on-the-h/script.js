@@ -83,7 +83,7 @@ let possiblePacks = {
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
 	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
-	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 2}, ["stone hut", "human", "human", "plank", "well"])
+	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"])
 }
 
 // resources stuff
@@ -186,8 +186,20 @@ function updateResources() {
 		}
 		return elm;
 	}
+	let hasRes = {}
 	for (index in resources) {
-		inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
+		if (resources[index].name != 'human') {
+			if (hasRes[resources[index].name] == undefined) {
+			 	let resourceElement = createHtmlFromResource(resources[index]);
+				hasRes[resources[index].name] = [1, resourceElement];
+				inventoryDiv.appendChild(resourceElement);
+			} else {
+				hasRes[resources[index].name][0] += 1;
+				hasRes[resources[index].name][1].innerHTML = resources[index].name + " (x" + hasRes[resources[index].name][0] + ")"
+			}
+		} else {
+			inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
+		}
 	}
 	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";
 }
@@ -220,6 +232,7 @@ function updateTasksList() {
 		link.innerHTML = name;
 		function addTaskIfBuyable(name2, time) {
 			if (name == name2) {
+				elm.title = "takes " + time + " seconds";
 				elm.addEventListener("click", () => {
 					let task2 = new Task(name, time);
 					currentTasks.push(task2);
@@ -259,7 +272,7 @@ updateTasksList();
 updatePacksList();
 
 let updateInterval = 0.02;
-let speedMod = 10;
+let speedMod = 1;
 
 function unAssignTasks(task) {
 	let humans = getResource("human");
