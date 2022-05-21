@@ -55,9 +55,11 @@ let buyableTasks = [];
 
 // packs stuff
 let possiblePacks = {
-	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["hut", "stick"]),
+	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick"]),
+	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
-	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "hut": 1, "stick": 1}, ["human", "stick"])
+	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
+	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 2}, ["stone hut", "human", "human", "plank", "well"])
 }
 
 // resources stuff
@@ -134,6 +136,7 @@ function updateResources() {
 		let elm = document.createElement("p");
 		elm.innerHTML = res.name;
 		if (res.name == "tree") {
+			elm.title = "can get wood";
 			elm.innerHTML += " 🪵"
 			if (getTask("chop tree").length > 0) {
 				let task = getTask("chop tree")[0];
@@ -141,12 +144,22 @@ function updateResources() {
 			}
 		}
 		if (res.name == "mine") {
+			elm.title = "can get stone";
 			elm.innerHTML += " 🪨"
 			if (getTask("mine stone").length > 0) {
 				let task = getTask("mine stone")[0];
 				elm.appendChild(makeProgressBar(100*task.time/task.maxTime));
 			}
 		}
+		if (res.name == "banana tree") {
+			elm.title = "can get banana for sten";
+			elm.innerHTML += " 🍌"
+			if (getTask("banana tree").length > 0) {
+				let task = getTask("banana tree")[0];
+				elm.appendChild(makeProgressBar(100*task.time/task.maxTime));
+			}
+		}
+		if (res.name == "") // todo this
 		return elm;
 	}
 	for (index in resources) {
@@ -181,6 +194,11 @@ function updateTasksList() {
 				currentTasks.push(new Task("mine stone", 30));
 			});
 		}
+		if (name == "banana tree") {
+			link.addEventListener("click", () => {
+				currentTasks.push(new Task("banana tree", 30));
+			});
+		}
 		return elm;
 	}
 	if (getResource("human").length > currentTasks.length) {
@@ -190,6 +208,9 @@ function updateTasksList() {
 		}
 		if (getResource("mine").length > 0) {
 			tasksDiv.appendChild(addTask("mine stone"))
+		}
+		if (getResource("banana tree").length > 0) {
+			tasksDiv.appendChild(addTask("banana tree"))
 		}
 	} else {
 		let noTasksAvailable = document.createElement("p")
@@ -215,6 +236,9 @@ setInterval(() => {
 			}
 			if (currentTasks[index].name == "mine stone") {
 				resources.push(new Resource("stone"));
+			}
+			if (currentTasks[index].name == "banana tree") {
+				resources.push(new Resource("banana"));
 			}
 		}
 	}
