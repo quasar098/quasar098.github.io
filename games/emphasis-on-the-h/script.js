@@ -168,6 +168,7 @@ function updateResources() {
 	function createHtmlFromResource(res) {
 		let elm = document.createElement("p");
 		elm.innerHTML = res.name;
+		elm.resource = res;
 		function appendGen(name, result, task) {
 			if (res.name == name) {
 				elm.title = "can get " + result;
@@ -181,11 +182,13 @@ function updateResources() {
 		appendGen("well", "water", "scoop water");
 		let task = res.assigned;
 		if (task != undefined) {
-			elm.appendChild(makeProgressBar(task));
+			elm.progBar = makeProgressBar(task);
+			elm.appendChild(elm.progBar);
 		}
 		return elm;
 	}
 	let hasRes = {}
+	let hasBananas = getResource("banana").length > 0;
 	for (index in resources) {
 		if (resources[index].name != 'human') {
 			if (hasRes[resources[index].name] == undefined) {
@@ -197,7 +200,20 @@ function updateResources() {
 				hasRes[resources[index].name][1].innerHTML = resources[index].name + " (x" + hasRes[resources[index].name][0] + ")"
 			}
 		} else {
-			inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
+			let humanElm = createHtmlFromResource(resources[index]);
+			if (hasBananas & humanElm.resource.assigned != undefined) {
+				humanElm.title = "feed banana"
+				let feedBanana = document.createElement("a");
+				feedBanana.innerHTML = "feed banana";
+				feedBanana.addEventListener("click", () => {
+					humanElm.resource.assigned.time -= 4;
+					humanElm.progBar.value -= 100*(4/humanElm.resource.assigned.maxTime);
+					removeResource("banana", 1);
+					updateResources();
+				});
+				humanElm.appendChild(feedBanana);
+			}
+			inventoryDiv.appendChild(humanElm);
 		}
 	}
 	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";

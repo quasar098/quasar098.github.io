@@ -54,6 +54,7 @@ div#pack-div {
 }
 progress {
 	margin-left: 10px;
+	margin-right: 10px;
 }
 div#pack-div:hover {
 	box-shadow: 11px 11px 1rem rgb(0, 0, 0, 0.2);
