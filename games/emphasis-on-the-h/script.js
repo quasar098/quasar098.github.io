@@ -290,10 +290,8 @@ setInterval(() => {
 		let progressBar = progressBars[index];
 		progressBar.value -= updateInterval/progressBar.task.maxTime*100 * speedMod;
 		if (progressBar.value <= 0) {
-			if (progressBar.parentElement != null) {
-				progressBars.shift();
-				progressBar.parentElement.removeChild(progressBar);
-			}
+			progressBars.shift();
+			progressBar.remove();
 		}
 	}
 	let removeMe = undefined;
