@@ -77,7 +77,7 @@ let buyableTasks = [];
 let progressBars = [];
 
 // packs stuff
-let possiblePacks = {
+const possiblePacks = {
 	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick", 'stick']),
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
@@ -88,6 +88,12 @@ let possiblePacks = {
 
 // resources stuff
 let resources = [new Resource("human"), new Resource("tree"), new Resource("wood"), new Resource("mine"), new Resource("stone")];
+const unstackableResources = [
+	"human",
+	"legendary loot box",
+	"rare loot box",
+	"common loot box"
+];
 
 function removeResource(name, amount) {
 	let newRes = [];
@@ -163,6 +169,39 @@ function addResource(name, amount) {
 	return true;
 }
 
+function commonResource() {
+	let possible = [
+		"1wood",
+		"3wood",
+		"1stone",
+		"3stone",
+		"1rare loot box"
+	]
+	return possible[Math.floor(Math.random() * possible.length)];
+}
+
+function rareResource() {
+	let possible = [
+		"2plank",
+		"5nail",
+		"1stone hut",
+		"8wood",
+		"8stone",
+		"2common loot box",
+		"1legendary loot box"
+	]
+	return possible[Math.floor(Math.random() * possible.length)];
+}
+
+function legendaryResource() {
+	let possible = [
+		"1human",
+		"2human",
+		"2rare loot box"
+	]
+	return possible[Math.floor(Math.random() * possible.length)];
+}
+
 function updateResources() {
 	removeAllChildNodes(inventoryDiv);
 	progressBars = [];
@@ -181,6 +220,33 @@ function updateResources() {
 		appendGen("mine", "stone", "mine stone");
 		appendGen("banana tree", "banana", "harvest banana");
 		appendGen("well", "water", "scoop water");
+		if (res.name.includes("loot box")) {  // is loot box
+			let openLootBoxElm = document.createElement("a");
+			let chosenRes;
+			let amount;
+			let resName;
+			if (res.name.includes("legendary")) {
+				chosenRes = legendaryResource();
+			}
+			else if (res.name.includes("rare")) {
+				chosenRes = rareResource();
+			}
+			else {
+				chosenRes = commonResource();
+			}
+			amount = chosenRes[0];
+			resName = chosenRes.slice(1);
+			openLootBoxElm.innerHTML = "open it";
+			openLootBoxElm.amount = amount;
+			openLootBoxElm.resName = resName;
+			openLootBoxElm.style.marginLeft = "10px";
+			openLootBoxElm.addEventListener("click", (e) => {
+				addResource(e.target.resName, e.target.amount);
+				removeResource(e.target.parentElement.innerText.slice(0,-7), 1);
+				updateResources();
+			});
+			elm.appendChild(openLootBoxElm);
+		}
 		let task = res.assigned;
 		if (task != undefined) {
 			elm.progBar = makeProgressBar(task);
@@ -191,7 +257,7 @@ function updateResources() {
 	let hasRes = {}
 	let hasBananas = getResource("banana").length > 0;
 	for (index in resources) {
-		if (resources[index].name != 'human') {
+		if (!unstackableResources.includes(resources[index].name)) {  // group objects but not unstackableResources
 			if (hasRes[resources[index].name] == undefined) {
 			 	let resourceElement = createHtmlFromResource(resources[index]);
 				hasRes[resources[index].name] = [1, resourceElement];
@@ -200,21 +266,25 @@ function updateResources() {
 				hasRes[resources[index].name][0] += 1;
 				hasRes[resources[index].name][1].innerHTML = resources[index].name + " (x" + hasRes[resources[index].name][0] + ")"
 			}
-		} else {
-			let humanElm = createHtmlFromResource(resources[index]);
-			if (hasBananas & humanElm.resource.assigned != undefined) {
-				humanElm.title = "feed banana"
-				let feedBanana = document.createElement("a");
-				feedBanana.innerHTML = "feed banana";
-				feedBanana.addEventListener("click", () => {
-					humanElm.resource.assigned.time -= 4;
-					humanElm.progBar.value -= 100*(4/humanElm.resource.assigned.maxTime);
-					removeResource("banana", 1);
-					updateResources();
-				});
-				humanElm.appendChild(feedBanana);
+		} else {  // group humans
+			if (resources[index].name == "human") {
+				let humanElm = createHtmlFromResource(resources[index]);
+				if (hasBananas & humanElm.resource.assigned != undefined) {
+					humanElm.title = "feed banana"
+					let feedBanana = document.createElement("a");
+					feedBanana.innerHTML = "feed banana";
+					feedBanana.addEventListener("click", () => {
+						humanElm.resource.assigned.time -= 4;
+						humanElm.progBar.value -= 100*(4/humanElm.resource.assigned.maxTime);
+						removeResource("banana", 1);
+						updateResources();
+					});
+					humanElm.appendChild(feedBanana);
+				}
+				inventoryDiv.appendChild(humanElm);
+			} else {
+				inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 			}
-			inventoryDiv.appendChild(humanElm);
 		}
 	}
 	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";
