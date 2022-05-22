@@ -299,10 +299,9 @@ setInterval(() => {
 		}
 	}
 	let humans = getResource("human");
-	let filteredTasks;
 	for (index in humans) {
-		function giveReward(taskName, awardName) {
-			if (currentTasks[index].name == taskName) {
+		function giveReward(human, taskName, awardName) {
+			if (human.assigned.name == taskName) {
 				resources.push(new Resource(awardName));
 			}
 		}
@@ -310,17 +309,23 @@ setInterval(() => {
 		if (human.assigned != undefined) {  // has task?
 			human.assigned.time -= updateInterval;
 			if (human.assigned.time <= 0) {  // is task is over?
-				giveReward("chop tree", "wood");
-				giveReward("mine stone", "stone");
-				giveReward("harvest banana", "banana");
-				giveReward("scoop water", "water");
-				currentTasks = currentTasks.filter(task => task != human.assigned);
+				giveReward(human, "chop tree", "wood");
+				giveReward(human, "mine stone", "stone");
+				giveReward(human, "harvest banana", "banana");
+				giveReward(human, "scoop water", "water");
 				human.assigned = undefined;
 				updateResources();
 				updatePacksList();
 				updateTasksList();
 			}
 		}
+	}
+	let filtered = currentTasks.filter(task => task.time > 0);
+	if (filtered.length != currentTasks.length) {
+		currentTasks = filtered;
+		updatePacksList();
+		updateResources();
+		updateTasksList();
 	}
 }, 1000*updateInterval);
 document.body.style.userSelect = "none";

@@ -68,6 +68,7 @@ div#inv-div {
 	height: min-content;
 	transition-duration: 0.2s;
 	transition-timing-function: ease-in-out;
+	margin-bottom: 20px;
 }
 div#inv-div:hover {
 	box-shadow: 11px 11px 1rem rgb(0, 0, 0, 0.2);
