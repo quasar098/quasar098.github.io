@@ -10,7 +10,6 @@ class Task {
 		this.name = name;
 		this.time = time;
 		this.maxTime = time;
-		this._ = Math.random();
 	}
 }
 class Resource {
@@ -274,17 +273,6 @@ updatePacksList();
 let updateInterval = 0.02;
 let speedMod = 1;
 
-function unAssignTasks(task) {
-	let humans = getResource("human");
-	for (index in humans) {
-		if (humans[index].assigned != undefined) {
-			if (humans[index].assigned.time <= 0) {
-				humans[index].assigned = undefined;
-			}
-		}
-	}
-}
-
 setInterval(() => {
 	for (index in progressBars) {
 		let progressBar = progressBars[index];
@@ -294,28 +282,29 @@ setInterval(() => {
 			progressBar.remove();
 		}
 	}
-	let removeMe = undefined;
-	for (index in currentTasks) {
-		currentTasks[index].time -= updateInterval * speedMod;
-		if (currentTasks[index].time < 0) {
-			removeMe = currentTasks[index];
-			function giveReward(taskName, awardName) {
-				if (currentTasks[index].name == taskName) {
-					resources.push(new Resource(awardName));
-				}
+	let humans = getResource("human");
+	let filteredTasks;
+	for (index in humans) {
+		function giveReward(taskName, awardName) {
+			if (currentTasks[index].name == taskName) {
+				resources.push(new Resource(awardName));
 			}
-			giveReward("chop tree", "wood");
-			giveReward("mine stone", "stone");
-			giveReward("harvest banana", "banana");
-			giveReward("scoop water", "water");
 		}
-	}
-	if (removeMe != undefined) {
-		unAssignTasks();
-		currentTasks.shift();
-		updatePacksList();
-		updateTasksList();
-		updateResources();
+		let human = humans[index];
+		if (human.assigned != undefined) {  // has task?
+			human.assigned.time -= updateInterval;
+			if (human.assigned.time <= 0) {  // is task is over?
+				giveReward("chop tree", "wood");
+				giveReward("mine stone", "stone");
+				giveReward("harvest banana", "banana");
+				giveReward("scoop water", "water");
+				currentTasks = currentTasks.filter(task => task != human.assigned);
+				human.assigned = undefined;
+				updateResources();
+				updatePacksList();
+				updateTasksList();
+			}
+		}
 	}
 }, 1000*updateInterval);
 document.body.style.userSelect = "none";
