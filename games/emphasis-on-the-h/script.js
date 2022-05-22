@@ -1,4 +1,5 @@
 console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
+let resources;
 let index;
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -17,6 +18,13 @@ class Resource {
 		this.name = name;
 		this.assigned = undefined; // only for humans
 	}
+	// do not define any instance or class functions because JSON doesnt save when serializing. it makes a basic object
+}
+if (localStorage.getItem("emphasisResources") == null) {
+	resources = [new Resource("human"), new Resource("tree"), new Resource("wood"), new Resource("mine"), new Resource("stone")];
+	saveGame();
+} else {
+	resources = JSON.parse(localStorage.getItem("emphasisResources"));
 }
 class Pack {
 	constructor(name, cost, get) {
@@ -70,6 +78,11 @@ let packsDiv = document.getElementById('pack-shop');
 let inventoryDiv = document.getElementById('inventory');
 let tasksDiv = document.getElementById('tasks');
 let workIndicator = document.getElementById('work-indicator');
+let saveButton = document.getElementById('save');
+let resetButton = document.getElementById('reset');
+let saveText = document.getElementById('save-timer');
+let queueAllBox = document.getElementById('queue-all');
+let queueText = document.getElementById('queue-text');
 
 // tasks stuff
 let currentTasks = [];
@@ -83,17 +96,59 @@ const possiblePacks = {
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
 	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
 	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"]),
-	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, ["common loot box", "rare loot box", "legendary loot box"])
+	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, ["common loot box", "rare loot box", "legendary loot box"]),
+	"societal pack": new Pack("societal pack", {"stone hut": 2, "wood hut": 4, "plank": 2, "banana": 5}, ["castle", "field", "iron ore deposit"]),
+	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, ["human", "forge"])
 }
 
 // resources stuff
-let resources = [new Resource("human"), new Resource("tree"), new Resource("wood"), new Resource("mine"), new Resource("stone")];
 const unstackableResources = [
 	"human",
 	"legendary loot box",
 	"rare loot box",
 	"common loot box"
 ];
+
+queueText.addEventListener("click", () => {
+	queueAllBox.checked = !queueAllBox.checked;
+});
+
+let discoveredPackNames = JSON.parse(localStorage.getItem("emphasisDiscoveredPacks"));
+if (discoveredPackNames != null) {
+	for (index in discoveredPackNames) {
+		possiblePacks[discoveredPackNames[index]].rewardDiscovered = true;
+	}
+}
+
+function saveGame() {
+	let resourcesCopy = [];
+	for (index in resources) {
+		resourcesCopy.push(new Resource(resources[index].name));
+	}
+	localStorage.setItem("emphasisResources", JSON.stringify(resourcesCopy));
+
+	// discovered packs
+	let rewardsDiscovered = []
+	for (let packName in possiblePacks) {
+		if (possiblePacks[packName].rewardDiscovered) {
+			rewardsDiscovered.push(packName);
+		}
+	}
+	localStorage.setItem("emphasisDiscoveredPacks", JSON.stringify(rewardsDiscovered))
+}
+
+resetButton.addEventListener("click", () => {
+	if (confirm("are you sure you want to reset")) {
+		resources = [new Resource("human"), new Resource("tree"), new Resource("wood"), new Resource("mine"), new Resource("stone")];
+		saveGame();
+		window.location.reload();
+	}
+});
+
+saveButton.addEventListener("click", () => {
+	saveGame();
+	window.location.reload();
+});
 
 function removeResource(name, amount) {
 	let newRes = [];
@@ -130,7 +185,12 @@ function updatePacksList() {
 	function createPack(name) {
 		let elm = document.createElement("p");
 		let link = document.createElement("a");
-		link.innerHTML = name;
+		link.innerHTML = name + " ";
+		if (possiblePacks[name].buyable()) {
+			link.innerHTML += "✅"
+		} else {
+			link.innerHTML += "❌"
+		}
 		link.pack = possiblePacks[name];
 		elm.appendChild(link);
 		elm.addEventListener("click", (e) => {
@@ -191,7 +251,8 @@ function rareResource() {
 		"8wood",
 		"8stone",
 		"2common loot box",
-		"1legendary loot box"
+		"1legendary loot box",
+		"4banana"
 	]
 	return possible[Math.floor(Math.random() * possible.length)];
 }
@@ -203,7 +264,9 @@ function legendaryResource() {
 	let possible = [
 		"1human",
 		"2human",
-		"2rare loot box"
+		"2rare loot box",
+		"8banana",
+		"4iron ore"
 	]
 	return possible[Math.floor(Math.random() * possible.length)];
 }
@@ -224,8 +287,10 @@ function updateResources() {
 		// append to resource generator name
 		appendGen("tree", "wood", "chop tree");
 		appendGen("mine", "stone", "mine stone");
-		appendGen("banana tree", "banana", "harvest banana");
+		appendGen("harvest banana", "banana", "harvest banana");
 		appendGen("well", "water", "scoop water");
+		appendGen("castle", "gold bar", "steal from castle");
+		appendGen("field", "wheat", "work the fields");
 		if (res.name.includes("loot box")) {  // is loot box
 			let openLootBoxElm = document.createElement("a");
 			let chosenRes;
@@ -314,6 +379,16 @@ function nextFreeHuman() {
 	return {"task": undefined} // fake human
 }
 
+function queueAllTask(task) {
+	let humans = getResource("human");
+	for (let index2 in humans) {
+		if (humans[index2].assigned == undefined) {
+			humans[index2].assigned = {...task};
+		}
+	}
+	updateResources();
+}
+
 function updateTasksList() {
 	buyableTasks = [];
 	removeAllChildNodes(tasksDiv);
@@ -327,31 +402,42 @@ function updateTasksList() {
 				elm.title = "takes " + time + " seconds";
 				elm.addEventListener("click", () => {
 					let task2 = new Task(name, time);
-					currentTasks.push(task2);
-					nextFreeHuman().assigned = task2;
-					updateTasksList();
-					updateResources();
+					if (!queueAllBox.checked) {
+						currentTasks.push(task2);
+						nextFreeHuman().assigned = task2;
+						updateTasksList();
+						updateResources();
+					} else {
+						queueAllTask(task2);
+						updateTasksList()
+						updateResources();
+					}
 				});
 			}
 		}
+		// add to creating element if matches name
 		addTaskIfBuyable("chop tree", 5);
 		addTaskIfBuyable("mine stone", 8);
 		addTaskIfBuyable("harvest banana", 3);
 		addTaskIfBuyable("scoop water", 3);
+		addTaskIfBuyable("steal from castle", 10);
+		addTaskIfBuyable("work the fields", 8);
 		return elm;
 	}
 	// can do tasks (enough humans available)
 	if (getResource("human").length > currentTasks.length) {
-		// can do task (resource gen found)
 		function checkGen(nameOfGen, task) {
 			if (getResource(nameOfGen).length > 0) {
 				tasksDiv.appendChild(addTask(task))
 			}
 		}
+		// can do task (resource gen found)
 		checkGen("tree", "chop tree");
 		checkGen("mine", "mine stone");
 		checkGen("banana tree", "harvest banana");
 		checkGen("well", "scoop water");
+		checkGen("castle", "steal from castle");
+		checkGen("field", "work the fields");
 	} else {
 		let noTasksAvailable = document.createElement("p")
 		noTasksAvailable.innerHTML = "all humans are working";
@@ -390,6 +476,8 @@ setInterval(() => {
 				giveReward(human, "mine stone", "stone");
 				giveReward(human, "harvest banana", "banana");
 				giveReward(human, "scoop water", "water");
+				giveReward(human, "steal from castle", "gold bar");
+				giveReward(human, "work the fields", "wheat");
 				human.assigned = undefined;
 				updateResources();
 				updatePacksList();

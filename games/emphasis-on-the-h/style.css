@@ -15,9 +15,37 @@ p {
 	font-size: 16px;
 	width: max-content;
 }
+p.help-section {
+	margin-bottom: 0px;
+	margin-right: 10px;
+	background-color: #5EFFAE;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 5px 5px 1rem rgb(0, 0, 0, 0.2);
+	height: min-content;
+}
+#help {
+	margin-bottom: 3px;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	display: grid;
+	grid-auto-flow: column;
+}
 html {
 	height: 100%;
 	width: 100%;
+}
+.fade {
+    animation: fading 2s forwards;
+}
+@keyframes fading {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 body {
 	height: 100%;
@@ -27,6 +55,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+p.nobg {
+	background-color: transparent;
+	box-shadow: none;
+	transform: translateX( -10px );
 }
 a {
 	color: #3355FF;
