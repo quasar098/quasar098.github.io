@@ -82,7 +82,8 @@ let possiblePacks = {
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
 	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
-	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"])
+	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"]),
+	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, ["common loot box", "rare loot box", "legendary loot box"])
 }
 
 // resources stuff
