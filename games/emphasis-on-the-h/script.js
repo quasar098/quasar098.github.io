@@ -181,6 +181,9 @@ function commonResource() {
 }
 
 function rareResource() {
+	if (Math.random() > 0.95) {
+		return "iron ore";
+	}
 	let possible = [
 		"2plank",
 		"5nail",
@@ -194,6 +197,9 @@ function rareResource() {
 }
 
 function legendaryResource() {
+	if (Math.random() > 0.7) {
+		return "iron ore";
+	}
 	let possible = [
 		"1human",
 		"2human",
