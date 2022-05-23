@@ -84,6 +84,7 @@ let resetButton = document.getElementById('reset');
 let saveText = document.getElementById('save-timer');
 let queueAllBox = document.getElementById('queue-all');
 let queueText = document.getElementById('queue-text');
+let showHumansBox = document.getElementById('show-humans').firstChild;
 
 // tasks stuff
 let currentTasks = [];
@@ -99,7 +100,8 @@ possiblePacks = {
 	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"]),
 	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, ["common loot box", "rare loot box", "legendary loot box"]),
 	"societal pack": new Pack("societal pack", {"stone hut": 2, "wood hut": 4, "plank": 2, "banana": 5}, ["castle", "field", "iron ore deposit"]),
-	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, ["human", "forge"])
+	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, ["human", "forge"]),
+	"teamwork pack": new Pack("teamwork pack", {"banana tree": 1, "human": 10}, ["banana", "banana","banana","banana","banana","banana","banana","banana","banana","banana","banana","banana","banana", "human","human","human","human","human","human","human","human","human","human", "legendary loot box", "legendary loot box", "rare loot box"])
 }
 
 // resources stuff
@@ -110,9 +112,24 @@ const unstackableResources = [
 	"common loot box"
 ];
 
+showHumansBox.addEventListener("click", () => {
+	setTimeout(() => {
+		updateResources();
+	}, 10);
+});
+
+if (localStorage.getItem("emphasisShowHumans") == null) {
+	localStorage.setItem("emphasisShowHumans", JSON.stringify(showHumansBox.checked));
+}
+showHumansBox.checked = JSON.parse(localStorage.getItem("emphasisShowHumans"));
+
 queueText.addEventListener("click", () => {
 	queueAllBox.checked = !queueAllBox.checked;
 });
+
+function showHumans() {
+	return showHumansBox.checked;
+}
 
 let discoveredPackNames = JSON.parse(localStorage.getItem("emphasisDiscoveredPacks"));
 if (discoveredPackNames != null) {
@@ -135,7 +152,8 @@ function saveGame() {
 			rewardsDiscovered.push(packName);
 		}
 	}
-	localStorage.setItem("emphasisDiscoveredPacks", JSON.stringify(rewardsDiscovered))
+	localStorage.setItem("emphasisDiscoveredPacks", JSON.stringify(rewardsDiscovered));
+	localStorage.setItem("emphasisShowHumans", JSON.stringify(showHumansBox.checked));
 }
 
 resetButton.addEventListener("click", () => {
@@ -342,7 +360,7 @@ function updateResources() {
 		} else {  // group humans
 			if (resources[index].name == "human") {
 				let humanElm = createHtmlFromResource(resources[index]);
-				if (hasBananas & humanElm.resource.assigned != undefined) {
+				if (hasBananas & humanElm.resource.assigned != undefined & humanElm.progBar != undefined) {
 					humanElm.title = "feed banana"
 					let feedBanana = document.createElement("a");
 					feedBanana.innerHTML = "feed banana";
@@ -354,7 +372,9 @@ function updateResources() {
 					});
 					humanElm.appendChild(feedBanana);
 				}
-				inventoryDiv.appendChild(humanElm);
+				if (showHumans()) {
+					inventoryDiv.appendChild(humanElm);
+				}
 			} else {
 				inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 			}
