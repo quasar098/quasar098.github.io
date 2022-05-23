@@ -292,6 +292,7 @@ function updateResources() {
 		appendGen("well", "water", "scoop water");
 		appendGen("castle", "gold bar", "steal from castle");
 		appendGen("field", "wheat", "work the fields");
+		appendGen("iron ore deposit", "iron ore", "mine iron ore");
 		if (res.name.includes("loot box")) {  // is loot box
 			let openLootBoxElm = document.createElement("a");
 			let chosenRes;
@@ -403,13 +404,23 @@ function updateTasksList() {
 				elm.title = "takes " + time + " seconds";
 				elm.addEventListener("click", () => {
 					let task2 = new Task(name, time);
+					if (task2.name == "smelt iron ore") {
+						removeResource("iron ore", 1);
+					}
 					if (!queueAllBox.checked) {
 						currentTasks.push(task2);
 						nextFreeHuman().assigned = task2;
 						updateTasksList();
 						updateResources();
 					} else {
-						queueAllTask(task2);
+						let humans = getResource("human");
+						for (index in humans) {
+							let task3 = new Task(name, time);
+							if (humans[index].assigned == undefined) {
+								currentTasks.push(task3);
+								humans[index].assigned = task3;
+							}
+						}
 						updateTasksList()
 						updateResources();
 					}
@@ -423,11 +434,18 @@ function updateTasksList() {
 		addTaskIfBuyable("scoop water", 3);
 		addTaskIfBuyable("steal from castle", 10);
 		addTaskIfBuyable("work the fields", 8);
+		addTaskIfBuyable("mine iron ore", 60);
+		addTaskIfBuyable("smelt iron ore", 60);
 		return elm;
 	}
 	// can do tasks (enough humans available)
 	if (getResource("human").length > currentTasks.length) {
 		function checkGen(nameOfGen, task) {
+			if (nameOfGen == "forge") {
+				if (getResource("iron ore").length == 0) {
+					return;
+				}
+			}
 			if (getResource(nameOfGen).length > 0) {
 				tasksDiv.appendChild(addTask(task))
 			}
@@ -439,6 +457,8 @@ function updateTasksList() {
 		checkGen("well", "scoop water");
 		checkGen("castle", "steal from castle");
 		checkGen("field", "work the fields");
+		checkGen("iron ore deposit", "mine iron ore");
+		checkGen("forge", "smelt iron ore");
 	} else {
 		let noTasksAvailable = document.createElement("p")
 		noTasksAvailable.innerHTML = "all humans are working";
@@ -479,6 +499,8 @@ setInterval(() => {
 				giveReward(human, "scoop water", "water");
 				giveReward(human, "steal from castle", "gold bar");
 				giveReward(human, "work the fields", "wheat");
+				giveReward(human, "mine iron ore", "iron ore");
+				giveReward(human, "smelt iron ore", "iron bar");
 				human.assigned = undefined;
 				updateResources();
 				updatePacksList();
