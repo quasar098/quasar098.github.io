@@ -1,6 +1,7 @@
 console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
 let resources;
 let index;
+let possiblePacks;
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -90,7 +91,7 @@ let buyableTasks = [];
 let progressBars = [];
 
 // packs stuff
-const possiblePacks = {
+possiblePacks = {
 	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick", 'stick']),
 	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
 	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
