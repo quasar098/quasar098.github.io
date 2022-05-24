@@ -1,3 +1,15 @@
+// dom control
+let packsDiv = document.getElementById('pack-shop');
+let inventoryDiv = document.getElementById('inventory');
+let tasksDiv = document.getElementById('tasks');
+let workIndicator = document.getElementById('work-indicator');
+let saveButton = document.getElementById('save');
+let resetButton = document.getElementById('reset');
+let saveText = document.getElementById('save-timer');
+let queueAllBox = document.getElementById('queue-all');
+let queueText = document.getElementById('queue-text');
+let showHumansBox = document.getElementById('show-humans').firstChild;
+showHumansBox.checked = true;
 console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
 let resources;
 let index;
@@ -72,17 +84,6 @@ class Pack {
 	}
 }
 
-// dom control
-let packsDiv = document.getElementById('pack-shop');
-let inventoryDiv = document.getElementById('inventory');
-let tasksDiv = document.getElementById('tasks');
-let workIndicator = document.getElementById('work-indicator');
-let saveButton = document.getElementById('save');
-let resetButton = document.getElementById('reset');
-let saveText = document.getElementById('save-timer');
-let queueAllBox = document.getElementById('queue-all');
-let queueText = document.getElementById('queue-text');
-let showHumansBox = document.getElementById('show-humans').firstChild;
 
 // tasks stuff
 let currentTasks = [];
@@ -115,6 +116,8 @@ showHumansBox.addEventListener("click", () => {
 		updateResources();
 	}, 10);
 });
+
+showHumansBox.checked = true;
 
 if (localStorage.getItem("emphasisShowHumans") == null) {
 	localStorage.setItem("emphasisShowHumans", JSON.stringify(showHumansBox.checked));
@@ -157,6 +160,8 @@ function saveGame() {
 resetButton.addEventListener("click", () => {
 	if (confirm("are you sure you want to reset")) {
 		resources = [new Resource("human"), new Resource("tree"), new Resource("wood"), new Resource("mine"), new Resource("stone")];
+		possiblePacks = {};
+		showHumansBox.checked = true;
 		saveGame();
 		window.location.reload();
 	}
