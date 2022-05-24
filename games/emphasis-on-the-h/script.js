@@ -50,23 +50,21 @@ class Pack {
 		for (let costResource in this.cost) {
 			removeResource(costResource, this.cost[costResource]);
 		}
-		for (index in this.get) {
-			resources.push(new Resource(this.get[index]));
+		for (let getResource in this.get) {
+			addResource(getResource, this.get[getResource]);
 		}
 	}
 
 	hoverHint() {
-		let hint = "";
-		let costArray = [];
-		for (let resourceName in this.cost) {
-			for (index=0;index<this.cost[resourceName];index++) {
-				costArray.push(resourceName);
-			}
+		let hint = "cost: ";
+		for (let costName in this.cost) {
+			hint += costName + " (x" + (this.cost[costName] + ") ");
 		}
-		hint = "cost: " + costArray.join(", ");
-		hint += " | get: "
+		hint += "\nget: "
 		if (this.rewardDiscovered) {
-			hint += this.get.join(", ");
+			for (let getName in this.get) {
+				hint += getName + " (x" + (this.get[getName] + ") ");
+			}
 		} else {
 			hint += "?"
 		}
@@ -93,15 +91,15 @@ let progressBars = [];
 
 // packs stuff
 possiblePacks = {
-	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, ["wood hut", "stick", 'stick']),
-	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, ["human", "stick"]),
-	"food pack": new Pack("food pack", {"wood":2, "human":2}, ["human", "human", "banana tree", "banana"]),
-	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, ["plank", "plank", "plank", "nail", "nail"]),
-	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, ["stone hut", "human", "human", "plank", "well"]),
-	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, ["common loot box", "rare loot box", "legendary loot box"]),
-	"societal pack": new Pack("societal pack", {"stone hut": 2, "wood hut": 4, "plank": 2, "banana": 5}, ["castle", "field", "iron ore deposit"]),
-	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, ["human", "forge"]),
-	"teamwork pack": new Pack("teamwork pack", {"banana tree": 1, "human": 10}, ["banana", "banana","banana","banana","banana","banana","banana","banana","banana","banana","banana","banana","banana", "human","human","human","human","human","human","human","human","human","human", "legendary loot box", "legendary loot box", "rare loot box"])
+	"basic pack": new Pack("basic pack", {"wood":1, "stone":1}, {"wood hut":1, "stick":2}),
+	"human pack": new Pack("human pack", {"wood":3, "stone": 2, "wood hut": 1, "stick": 2}, {"human":1, "stick":1}),
+	"food pack": new Pack("food pack", {"wood":2, "human":2}, {"human":2, "banana tree":1, "banana":2}),
+	"builder pack": new Pack("builder pack", {"stone": 2, "wood": 4}, {"plank":3, "nail":2}),
+	"property pack": new Pack("property pack", {"plank": 3, "nail": 2, "human": 2, "stick": 1}, {"stone hut":1, "human":2, "plank":1, "well":1}),
+	"loot box pack": new Pack("loot box pack", {"water": 3, "nail": 4, "plank": 6}, {"common loot box":1, "rare loot box":1, "legendary loot box":1}),
+	"societal pack": new Pack("societal pack", {"stone hut": 2, "wood hut": 4, "plank": 2, "banana": 5}, {"castle":1, "field":1, "iron ore deposit":1}),
+	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, {"human":1, "forge":1}),
+	"teamwork pack": new Pack("teamwork pack", {"banana tree": 3, "human": 10}, {"banana":5,"human":10,"common loot box":2})
 }
 
 // resources stuff
