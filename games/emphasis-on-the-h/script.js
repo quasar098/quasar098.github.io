@@ -9,6 +9,8 @@ let saveText = document.getElementById('save-timer');
 let queueAllBox = document.getElementById('queue-all');
 let queueText = document.getElementById('queue-text');
 let showHumansBox = document.getElementById('show-humans').firstChild;
+let feedAllBanana = document.getElementById('feed-all-banana').firstChild;
+feedAllBanana.style.display = "none";
 showHumansBox.checked = true;
 console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
 let resources;
