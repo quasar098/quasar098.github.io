@@ -16,6 +16,13 @@ console.log("%ch%cello there", "font-size: 100px", "font-size: 12px");  // h
 let resources;
 let index;
 let possiblePacks;
+function copySaveData() {
+	navigator.clipboard.writeText(JSON.stringify(resources));
+	return "copied to clipboard!"
+}
+function pasteSaveData() {
+	resources = JSON.parse(navigator.clipboard.readText());
+}
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -26,6 +33,7 @@ class Task {
 		this.name = name;
 		this.time = time;
 		this.maxTime = time;
+		this.worker = undefined;
 	}
 }
 class Resource {
@@ -192,16 +200,7 @@ function getTask(name) {
 }
 
 function getResource(name, freehuman=false) {
-	let res = [];
-	for (index in resources) {
-		if (resources[index].name == name) {
-			if (freehuman & resources[index].assigned != undefined) {
-				continue;
-			}
-			res.push(resources[index]);
-		}
-	}
-	return res;
+	return resources.filter(i => i.name == name);
 }
 
 function updatePacksList() {
@@ -296,12 +295,17 @@ function legendaryResource() {
 }
 
 function updateResources() {
+	feedAllBanana.style.display = "none";
+	if (getResource("banana").length > 0 & currentTasks.length > 0) {
+		feedAllBanana.style.display = "block";
+	}  // todo banana are slow
 	removeAllChildNodes(inventoryDiv);
 	progressBars = [];
 	function createHtmlFromResource(res) {
 		let elm = document.createElement("p");
 		elm.innerHTML = res.name;
 		elm.resource = res;
+		res.element = elm;
 		function appendGen(name, result, task) {
 			if (res.name == name) {
 				elm.title = "can get " + result;
@@ -346,6 +350,7 @@ function updateResources() {
 		let task = res.assigned;
 		if (task != undefined) {
 			elm.progBar = makeProgressBar(task);
+			elm.resource.element.progBar = elm.progBar;
 			elm.appendChild(elm.progBar);
 		}
 		return elm;
@@ -433,8 +438,10 @@ function updateTasksList() {
 						removeResource("iron ore", 1);
 					}
 					if (!queueAllBox.checked) {
+						let assignHuman = nextFreeHuman();
 						currentTasks.push(task2);
-						nextFreeHuman().assigned = task2;
+						assignHuman.assigned = task2;
+						task2.worker = assignHuman;
 						updateTasksList();
 						updateResources();
 					} else {
@@ -444,6 +451,7 @@ function updateTasksList() {
 							if (humans[index].assigned == undefined) {
 								currentTasks.push(task3);
 								humans[index].assigned = task3;
+								task3.worker = humans[index];
 							}
 						}
 						updateTasksList()
@@ -508,6 +516,7 @@ setInterval(() => {
 		}
 	}
 	let humans = getResource("human");
+	let needsUpdating = false;
 	for (index in humans) {
 		function giveReward(human, taskName, awardName) {
 			if (human.assigned.name == taskName) {
@@ -527,11 +536,14 @@ setInterval(() => {
 				giveReward(human, "mine iron ore", "iron ore");
 				giveReward(human, "smelt iron ore", "iron bar");
 				human.assigned = undefined;
-				updateResources();
-				updatePacksList();
-				updateTasksList();
+				needsUpdating = true;
 			}
 		}
+	}
+	if (needsUpdating) {
+		updateResources();
+		updatePacksList();
+		updateTasksList();
 	}
 	let filtered = currentTasks.filter(task => task.time > 0);
 	if (filtered.length != currentTasks.length) {
@@ -541,4 +553,13 @@ setInterval(() => {
 		updateTasksList();
 	}
 }, 1000*updateInterval);
+feedAllBanana.addEventListener("click", () => {
+	let humans = getResource("human").filter(a => a.assigned != undefined);
+	if (getResource("banana").length > 0) {
+		for (let index3 in humans) {
+			humans[index3].assigned.time -= 4;
+		}
+	}
+	updateResources();
+});
 document.body.style.userSelect = "none";
