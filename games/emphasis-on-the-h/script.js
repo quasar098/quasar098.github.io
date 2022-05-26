@@ -554,11 +554,16 @@ setInterval(() => {
 	}
 }, 1000*updateInterval);
 feedAllBanana.addEventListener("click", () => {
+	let numBanans = getResource("banana").length;
 	let humans = getResource("human").filter(a => a.assigned != undefined);
 	if (getResource("banana").length > 0) {
-		for (let index3 in humans) {
+		let index3 = 0;
+		while (index3 < numBanans & index3 < humans.length) {
+			numBanans -= 1;
 			humans[index3].assigned.time -= 4;
+			index3++;
 		}
+		removeResource("banana", index3);
 	}
 	updateResources();
 });
