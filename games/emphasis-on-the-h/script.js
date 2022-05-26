@@ -17,11 +17,9 @@ let resources;
 let index;
 let possiblePacks;
 function copySaveData() {
-	navigator.clipboard.writeText(JSON.stringify(resources));
+	saveGame();
+	navigator.clipboard.writeText(localStorage.getItem("emphasisResources"));
 	return "copied to clipboard!"
-}
-function pasteSaveData() {
-	resources = JSON.parse(navigator.clipboard.readText());
 }
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -128,10 +126,9 @@ showHumansBox.addEventListener("click", () => {
 	}, 10);
 });
 
-showHumansBox.checked = true;
 
 if (localStorage.getItem("emphasisShowHumans") == null) {
-	localStorage.setItem("emphasisShowHumans", JSON.stringify(showHumansBox.checked));
+	localStorage.setItem("emphasisShowHumans", JSON.stringify(true));
 }
 showHumansBox.checked = JSON.parse(localStorage.getItem("emphasisShowHumans"));
 
