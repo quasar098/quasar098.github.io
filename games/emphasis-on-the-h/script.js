@@ -109,7 +109,8 @@ possiblePacks = {
 	"societal pack": new Pack("societal pack", {"stone hut": 2, "wood hut": 4, "plank": 2, "banana": 5}, {"castle":1, "field":1, "iron ore deposit":1}),
 	"iron age pack": new Pack("iron age pack", {"iron ore": 4, "human": 1, "stone": 10}, {"human":1, "forge":1}),
 	"teamwork pack": new Pack("teamwork pack", {"banana tree": 3, "human": 10}, {"banana":5,"human":10,"common loot box":2}),
-	"trader pack": new Pack("trader pack", {"gold bar": 30, "iron bar": 10, "banana": 50, "human": 3}, {"human": 3, "iron coin": 10, "copper coin": 50})
+	"trader pack": new Pack("trader pack", {"gold bar": 30, "iron bar": 10, "banana": 50, "human": 3}, {"human": 3, "iron coin": 10, "copper coin": 50}),
+	"auto banana pack": new Pack("auto banana pack", {"copper coin": 100, "iron coin": 20, "wheat": 30}, {"banana harvester": 1, "banana": 100, "banana tree": 100})
 }
 
 // resources stuff
@@ -566,3 +567,7 @@ feedAllBanana.addEventListener("click", () => {
 	updateResources();
 });
 document.body.style.userSelect = "none";
+setInterval(() => {
+	addResource("banana", getResource("banana harvester").length);
+	updateResources();
+}, 10000);
