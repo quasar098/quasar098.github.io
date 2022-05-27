@@ -29,9 +29,11 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("lunch", ["I play minecraft uno at lunch", "5 of dogs you can give to anyone", "2 of pigs you can put any card on top", "two chickens at once you have to say double chicken", "pig into pig turns into hogwash", "gambling with candies"], "05-27-2022")
+addBlogPost("chairmade", ["handmade", "footmade", "homemade","marmalade"], "05-27-2022");
 addBlogPost("untold story", ["the", "the the", "what"], "05-21-2022");
 addBlogPost("unrelated", ["parrot", "china", "salamander", "parsley", "bribery", "diction"], "05-21-2022");
-addBlogPost("mohammad ale", ["the punch", "the kick", "skrunkly the when"], "05-19-2022");
+addBlogPost("muhumud ale", ["the punch", "the kick", "skrunkly the when"], "05-19-2022");
 addBlogPost("just super writing here", ["powerlanguage", "divides", "powergrammar", "powervocabulary", "powersentencestructure", "I have the power"], "05-16-2022");
 addBlogPost("reporting 7", ["yet again at the table", "circle table", "people walk past me", "pasta me", "pasta"], "05-13-2022");
 addBlogPost("surveillance", ["there is always someone watching you"], "05-12-2022");
