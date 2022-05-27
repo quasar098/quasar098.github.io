@@ -355,6 +355,7 @@ function updateResources() {
 		return elm;
 	}
 	let hasRes = {}
+	let savedHumans = [];
 	let hasBananas = getResource("banana").length > 0;
 	for (index in resources) {
 		if (!unstackableResources.includes(resources[index].name)) {  // group objects but not unstackableResources
@@ -382,12 +383,15 @@ function updateResources() {
 					humanElm.appendChild(feedBanana);
 				}
 				if (showHumans()) {
-					inventoryDiv.appendChild(humanElm);
+					savedHumans.push(humanElm);
 				}
 			} else {
 				inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 			}
 		}
+	}
+	for (index in savedHumans) {
+		inventoryDiv.appendChild(savedHumans[index]);  // always show humans at the end
 	}
 	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";
 }
@@ -554,10 +558,11 @@ setInterval(() => {
 }, 1000*updateInterval);
 feedAllBanana.addEventListener("click", () => {
 	let numBanans = getResource("banana").length;
+	let startNumBanans = numBanans;
 	let humans = getResource("human").filter(a => a.assigned != undefined);
 	if (getResource("banana").length > 0) {
 		let index3 = 0;
-		while (index3 < numBanans & index3 < humans.length) {
+		while (index3 < startNumBanans & index3 < humans.length) {
 			numBanans -= 1;
 			humans[index3].assigned.time -= 4;
 			index3++;
