@@ -365,7 +365,6 @@ function updateResources() {
 				inventoryDiv.appendChild(resourceElement);
 			} else {
 				hasRes[resources[index].name][0] += 1;
-				hasRes[resources[index].name][1].innerHTML = resources[index].name + " (x" + hasRes[resources[index].name][0] + ")"
 			}
 		} else {  // group humans
 			if (resources[index].name == "human") {
@@ -388,6 +387,11 @@ function updateResources() {
 			} else {
 				inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 			}
+		}
+	}
+	for (let savedRes in hasRes) {
+		if (hasRes[savedRes][0]-1) {
+			hasRes[savedRes][1].innerHTML = savedRes + " (x" + hasRes[savedRes][0] + ")";
 		}
 	}
 	for (index in savedHumans) {
@@ -575,4 +579,4 @@ document.body.style.userSelect = "none";
 setInterval(() => {
 	addResource("banana", getResource("banana harvester").length);
 	updateResources();
-}, 10000);
+}, 1000);
