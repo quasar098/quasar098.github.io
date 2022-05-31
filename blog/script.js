@@ -51,12 +51,12 @@ addBlogPost("the toaster", ["I got a toaster", "I burn't my toaster", "There goe
 addBlogPost("in kahoots", ["Kahoot. Kahooter.", '"I will click the triangle"', "I always choose wrong..."], "04-11-2022");
 addBlogPost("tall guy", ["very tall", "back to nintendo", "rolling around in", "miyamoto's grave"], "04-06-2022");
 addBlogPost("inverse square law", ["Focus is definition of september"], "03-25-2022");
-addBlogPost("bigger and smaller", ["I said I was bigger than him", "He said I was short", "He was short"], "3-21-2022");
+addBlogPost("bigger and smaller", ["I said I was bigger than him", "He said I was short", "He was short"], "03-21-2022");
 addBlogPost("stairs of sadness", ["I take my walk down the stairs of sadness"], "03-17-2022");
 addBlogPost("numbers", ["Three is bigger than two only in numbers", "The one who decided it was", "before it wasn't"], "03-10-2022");
 addBlogPost("boxes", ["Boxes are falling", "Boxes aren't presents", "They are bombs"], "03-08-2022")
 addBlogPost("pasta update", ["I brought a thermos today", "it kept the pasta warm", "not warm enough but warm", "I'm not sure if it is good enough"], "03-07-2022");
-addBlogPost("reporting 6", ["I'm back at the beginning again", "again I am"], "03-3-2022");
+addBlogPost("reporting 6", ["I'm back at the beginning again", "again I am"], "03-03-2022");
 addBlogPost("reporting 5", ["I will be Gone,", "gone for a long time.", "Until the day of the end.", "Then I will be back again."], "02-20-2022");
 addBlogPost("nearly there", ["Not quite.", "Everyone said so,", "but we saw", "just nearly there"], "02-17-2022");
 addBlogPost("conversation 2", ["He said: puddle.", "I said: Have you tried?"], "02-17-2022");
