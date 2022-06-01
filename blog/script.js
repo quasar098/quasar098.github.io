@@ -29,7 +29,9 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
-addBlogPost("the truely", ["I truely", "truly", "trully", "feel cold"], "05-31-2022");
+addBlogPost("reporting 8", ["hungry games", "went hungry", "went to a", "bang!"], "06-01-2022");
+addBlogPost("sixty", ["seventy", "eighty", "more", "then", "out the door"], "06-01-2022");
+addBlogPost("guess the song 1", ["I truly", "truly", "truly", "feel cold"], "05-31-2022");
 addBlogPost("donkey bonga", ["konkey donk", "64 ", "nintendont", "take this away from me"], "05-27-2022")
 addBlogPost("lunch", ["I play minecraft uno at lunch", "5 of dogs you can give to anyone", "2 of pigs you can put any card on top", "two chickens at once you have to say double chicken", "pig into pig turns into hogwash", "gambling with candies"], "05-27-2022")
 addBlogPost("chairmade", ["handmade", "footmade", "homemade","marmalade"], "05-27-2022");
