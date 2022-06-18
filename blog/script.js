@@ -29,7 +29,10 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
-addBlogPost("donkey bonga", ["konkey donk", "64 ", "nintendont", "take this away from me"], "05-27-2022")
+addBlogPost("pasta update 3", ["hopefully the final update", "in the pasta trilogy", "I ate pesto pasta", "I made it myself", "(I forgot to put salt)", "(so now I'm salty)"], "06-18-2022");
+addBlogPost("parsley in a pear tree", ["owl", "hoo hoo", "monkey", "eek eek", "parsley", "??? ???"], "06-18-2022");
+addBlogPost("almost time", ["almost time", "no rhymes", "but there was", "just a rhyme in this sentence"], "06-18-2022");
+addBlogPost("donkey bonga", ["konkey donk", "64 ", "nintendont", "take this away from me"], "05-27-2022");
 addBlogPost("lunch", ["I play minecraft uno at lunch", "5 of dogs you can give to anyone", "2 of pigs you can put any card on top", "two chickens at once you have to say double chicken", "pig into pig turns into hogwash", "gambling with candies"], "05-27-2022")
 addBlogPost("chairmade", ["handmade", "footmade", "homemade","marmalade"], "05-27-2022");
 addBlogPost("untold story", ["the", "the the", "what"], "05-21-2022");
