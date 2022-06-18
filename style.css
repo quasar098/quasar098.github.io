@@ -21,6 +21,10 @@ p {
 	height: 100%;
 	width: 52%;
 }
+p.shorter-header {
+	width: 46%;
+	margin-right: 40px;
+}
 li {
 	font-size: 20px;
 	font-family: arial;
@@ -46,6 +50,8 @@ button {
 	transition-duration: 0.5s;
 	box-shadow: 0 2px 1rem rgb(0 0 0 / 15%);
 	filter: blur();
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 button:hover {
 	font-size: 24px;

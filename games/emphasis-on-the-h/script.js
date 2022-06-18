@@ -355,6 +355,7 @@ function updateResources() {
 		return elm;
 	}
 	let hasRes = {}
+	let savedHumans = [];
 	let hasBananas = getResource("banana").length > 0;
 	for (index in resources) {
 		if (!unstackableResources.includes(resources[index].name)) {  // group objects but not unstackableResources
@@ -364,7 +365,6 @@ function updateResources() {
 				inventoryDiv.appendChild(resourceElement);
 			} else {
 				hasRes[resources[index].name][0] += 1;
-				hasRes[resources[index].name][1].innerHTML = resources[index].name + " (x" + hasRes[resources[index].name][0] + ")"
 			}
 		} else {  // group humans
 			if (resources[index].name == "human") {
@@ -382,12 +382,20 @@ function updateResources() {
 					humanElm.appendChild(feedBanana);
 				}
 				if (showHumans()) {
-					inventoryDiv.appendChild(humanElm);
+					savedHumans.push(humanElm);
 				}
 			} else {
 				inventoryDiv.appendChild(createHtmlFromResource(resources[index]));
 			}
 		}
+	}
+	for (let savedRes in hasRes) {
+		if (hasRes[savedRes][0]-1) {
+			hasRes[savedRes][1].innerHTML = savedRes + " (x" + hasRes[savedRes][0] + ")";
+		}
+	}
+	for (index in savedHumans) {
+		inventoryDiv.appendChild(savedHumans[index]);  // always show humans at the end
 	}
 	workIndicator.innerHTML = currentTasks.length + "/" + getResource("human").length + " humans busy";
 }
@@ -554,10 +562,11 @@ setInterval(() => {
 }, 1000*updateInterval);
 feedAllBanana.addEventListener("click", () => {
 	let numBanans = getResource("banana").length;
+	let startNumBanans = numBanans;
 	let humans = getResource("human").filter(a => a.assigned != undefined);
 	if (getResource("banana").length > 0) {
 		let index3 = 0;
-		while (index3 < numBanans & index3 < humans.length) {
+		while (index3 < startNumBanans & index3 < humans.length) {
 			numBanans -= 1;
 			humans[index3].assigned.time -= 4;
 			index3++;
@@ -570,4 +579,4 @@ document.body.style.userSelect = "none";
 setInterval(() => {
 	addResource("banana", getResource("banana harvester").length);
 	updateResources();
-}, 10000);
+}, 1000);
