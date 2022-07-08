@@ -29,6 +29,7 @@ function addBlogPost(title, messages, date) {
   blogPostsDiv.appendChild(blogPost);
 }
 
+addBlogPost("crack", ["crack in the floor", "in the door", "there is more", "i just pour"], "07-07-2022");
 addBlogPost("pasta update 3", ["hopefully the final update", "in the pasta trilogy", "I ate pesto pasta", "I made it myself", "(I forgot to put salt)", "(so now I'm salty)"], "06-18-2022");
 addBlogPost("parsley in a pear tree", ["owl", "hoo hoo", "monkey", "eek eek", "parsley", "??? ???"], "06-18-2022");
 addBlogPost("almost time", ["almost time", "no rhymes", "but there was", "just a rhyme in this sentence"], "06-18-2022");
