@@ -3,33 +3,42 @@ html {
     overflow: hidden;
 }
 :not(i) {
-    font-family: Corbel;
-    font-weight: bold;
+    font-family: Arial;
 }
 h1 {
+    font-weight: normal;
     font-size: 60px;
     margin: 5px;
     font-style: italic;
 }
-div.vertical img {
+@keyframes pig-face-anim {
+    0% {
+        opacity: 0;
+        width: 0px;
+        object-fit: cover;
+    }
+    100% {
+        opacity: 1;
+        width: 80px;
+        object-fit: cover;
+    }
+}
+div.vertical img.logo {
     height: 80px;
-    width: 0px;
-    transition-duration: 0.4s;
-    object-fit: cover;
-    opacity: 0;
     transform: translateY(15px);
+    animation: pig-face-anim;
+    animation-duration: 0.4s;
 }
-div.vertical:hover img {
-    width: 80px;
-    opacity: 1;
+a:visited {
+    color: black;
 }
-h4 {
-    opacity: 0.7;
-    margin: 0px;
-    transform: translateY(-10px);
-    transition-duration: 0.4s;
+a.lnk {
+    opacity: 0.4;
+    transition: 1s opacity;
+    color: black;
 }
-div.vertical:hover h4 {
+a.lnk:hover {
+    transition: 0s opacity;
     opacity: 1;
 }
 p {
@@ -80,11 +89,60 @@ body {
 .inner {
     background-color: #FFFFFF67;
     width: 100%;
-    height: 400px;
+    height: 500px;
+    margin-bottom: 100px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .vertical {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.segment {
+    height: calc(100% - 30px);
+    width: 400px;
+    margin-right: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    border: solid white 2px;
+    box-sizing: border-box;
+    background-color: #FFFFFF22;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+.segment p {
+    color: #FFFFFF;
+    font-style: italic;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    margin: 0px;
+    padding: 5px;
+    background-color: #00000095;
+    border-radius: 1px;
+    z-index: 1;
+    transform: none;
+    transition: 0.3s padding;
+}
+.segment p:before {
+    content: "> "
+}
+.segment:hover p {
+    padding-left: 15px;
+}
+.segment img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+.segment:hover img {
+    transform: scale(1.03);
 }
