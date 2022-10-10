@@ -34,11 +34,11 @@ a:visited {
 }
 a.lnk {
     opacity: 0.4;
-    transition: 1s opacity;
+    transition: 0.5s opacity;
     color: black;
 }
 a.lnk:hover {
-    transition: 0s opacity;
+    transition: 0.3s opacity;
     opacity: 1;
 }
 p {
@@ -92,8 +92,10 @@ body {
     height: 500px;
     margin-bottom: 100px;
     white-space: nowrap;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
+    padding-right: 20px;
+    user-select: none;
 }
 .vertical {
     display: flex;
@@ -102,8 +104,8 @@ body {
     justify-content: center;
 }
 .segment {
-    height: calc(100% - 30px);
     width: 400px;
+    height: calc(100% - 30px);
     margin-right: 0px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -128,6 +130,7 @@ body {
     border-radius: 1px;
     z-index: 1;
     transform: none;
+    user-select: none;
     transition: 0.3s padding;
 }
 .segment p:before {
@@ -145,4 +148,38 @@ body {
 }
 .segment:hover img {
     transform: scale(1.03);
+}
+.goleft {
+    user-select: none;
+    position: absolute;
+    height: 500px;
+    width: 50px;
+    left: 0px;
+    z-index: 2;
+    background-color: #FFFFFF67;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.goright {
+    user-select: none;
+    position: absolute;
+    height: 500px;
+    right: 0px;
+    width: 50px;
+    z-index: 2;
+    background-color: #FFFFFF99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.goleft i {
+    color: white;
+    user-select: none;
+    font-size: 30px;
+}
+.goright i {
+    color: white;
+    user-select: none;
+    font-size: 30px;
 }
