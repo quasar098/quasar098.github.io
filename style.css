@@ -2,6 +2,13 @@ html {
 	height: 100%;
     overflow: hidden;
 }
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
 :not(i) {
     font-family: Arial;
 }
@@ -104,8 +111,10 @@ body {
     justify-content: center;
 }
 .segment {
+    position: absolute;
+    left: 0px;
     width: 400px;
-    height: calc(100% - 30px);
+    height: calc(470px);
     margin-right: 0px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -113,7 +122,6 @@ body {
     border: solid white 2px;
     box-sizing: border-box;
     background-color: #FFFFFF22;
-    position: relative;
     display: inline-block;
     overflow: hidden;
 }
@@ -148,38 +156,4 @@ body {
 }
 .segment:hover img {
     transform: scale(1.03);
-}
-.goleft {
-    user-select: none;
-    position: absolute;
-    height: 500px;
-    width: 50px;
-    left: 0px;
-    z-index: 2;
-    background-color: #FFFFFF67;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.goright {
-    user-select: none;
-    position: absolute;
-    height: 500px;
-    right: 0px;
-    width: 50px;
-    z-index: 2;
-    background-color: #FFFFFF99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.goleft i {
-    color: white;
-    user-select: none;
-    font-size: 30px;
-}
-.goright i {
-    color: white;
-    user-select: none;
-    font-size: 30px;
 }

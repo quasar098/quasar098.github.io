@@ -1,18 +1,26 @@
 const inner = document.getElementById('inner');
-const left = document.getElementById('sleft');
-const right = document.getElementById('sright');
+
+let scrollAmt = localStorage.getItem("scrollAmt")*1 || 0;
+let offsetAmt = 0;
+let maxScroll = inner.children.length*415;
+let debug = 0;
+let isHovering = false;
+
+for (var i = 0; i < inner.children.length; i++) {
+    inner.children[i].style.transform = `translate(${(offsetAmt+scrollAmt)%maxScroll-415}px)`
+    debug = (scrollAmt%maxScroll);
+    offsetAmt += 415;
+}
 
 setInterval(() => {
-    left.style.display = inner.scrollLeft != 0 ? "flex" : 'none';
-    right.style.display = inner.scrollWidth-inner.getBoundingClientRect().width != inner.scrollLeft ? 'flex' : 'none';
-    inner.scrollLeft = inner.scrollLeft*0.95+goalScroll*0.05;
-}, 5)
+    offsetAmt = 0;
+    scrollAmt += 0.5;
+    isHovering = false;
 
-goalScroll = 0;
-
-right.addEventListener("click", (e) => {
-    goalScroll += 100;
-});
-left.addEventListener("click", (e) => {
-    goalScroll -= 100;
-});
+    for (var i = 0; i < inner.children.length; i++) {
+        inner.children[i].style.transform = `translate(${(offsetAmt+scrollAmt)%maxScroll-415}px)`
+        debug = (scrollAmt%maxScroll);
+        offsetAmt += 415;
+    }
+    localStorage.setItem("scrollAmt", scrollAmt);
+}, 1)
